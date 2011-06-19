@@ -1,0 +1,19 @@
+{
+    "name": "color-string",
+    "description": "parse and generate CSS color strings",
+    "version": "0.1.0",
+    "author": "Heather Arthur <fayearthur@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/harthur/color-string.git"
+    },
+    "main": "./color-string",
+    "dependencies": {
+        "color-convert": "0.2.x"
+    },
+    "devDependencies": {
+        "browserify": ">=1.0.0",
+        "uglify-js": "1.0.x"
+    },
+    "keywords": ["color", "colour", "rgb", "css"]
+}
