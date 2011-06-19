@@ -11,6 +11,8 @@ colorString.getRgba("rgb(200, 200, 200)")        // [200, 200, 200, 1]
 
 colorString.getHsl("hsl(360, 100%, 50%)")        // [360, 100, 50]
 colorString.getHsla("hsla(360, 60%, 50%, 0.4)")  // [360, 60, 50, 0.4]
+
+colorString.getAlpha("rgba(200, 0, 12, 0.6)")    // 0.6
 ```
 #### generating:
 ```javascript

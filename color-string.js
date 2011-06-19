@@ -6,6 +6,7 @@ module.exports = {
    getHsla: getHsla,
    getRgb: getRgb,
    getHsl: getHsl,
+   getAlpha: getAlpha,
    
    hexString: hexString,
    rgbString: rgbString,
@@ -92,6 +93,16 @@ function getRgb(string) {
 
 function getHsl(string) {
    return getHsla(string).slice(0, 3);
+}
+
+function getAlpha(string) {
+   var vals = getRgba(string);
+   if (vals) {
+      return vals[3];
+   }
+   else if (vals = getHsla(string)) {
+      return vals[3];
+   }
 }
 
 // generators

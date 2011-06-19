@@ -9,6 +9,11 @@ assert.deepEqual(string.getRgba("blue"), [0, 0, 255, 1]);
 assert.deepEqual(string.getRgba("transparent"), [0, 0, 0, 0]);
 assert.deepEqual(string.getHsla("hsl(240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
 
+assert.equal(string.getAlpha("rgb(244, 233, 100)"), 1);
+assert.equal(string.getAlpha("rgba(244, 233, 100, 0.5)"), 0.5);
+assert.equal(string.getAlpha("hsla(244, 100%, 100%, 0.6)"), 0.6);
+
+
 // alpha
 assert.deepEqual(string.getRgba("rgba(200, 20, 233, 0.2)"), [200, 20, 233, 0.2]);
 assert.deepEqual(string.getRgba("rgba(100%, 30%, 90%, 0.2)"), [255, 77, 229, 0.2]);
