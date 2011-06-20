@@ -111,21 +111,21 @@ function hexString(rgb) {
               + hexDouble(rgb[2]);
 }
 
-function rgbString(rgba) {
-   if (rgba[3] && rgba[3] < 1) {
-      return rgbaString(rgba);
+function rgbString(rgba, alpha) {
+   if (alpha || (rgba[3] && rgba[3] < 1)) {
+      return rgbaString(rgba, alpha);
    }
    return "rgb(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ")";
 }
 
-function rgbaString(rgba) {
+function rgbaString(rgba, alpha) {
    return "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2]
-           + ", " + (rgba[3] || 1) + ")";
+           + ", " + (alpha || rgba[3] || 1) + ")";
 }
 
-function percentString(rgba) {
-   if (rgba[3] && rgba[3] < 1) {
-      return percentaString(rgba);
+function percentString(rgba, alpha) {
+   if (alpha || (rgba[3] && rgba[3] < 1)) {
+      return percentaString(rgba, alpha);
    } 
    var r = Math.round(rgba[0]/255 * 100),
        g = Math.round(rgba[1]/255 * 100),
@@ -134,23 +134,23 @@ function percentString(rgba) {
    return "rgb(" + r + "%, " + g + "%, " + b + "%)"; 
 }
 
-function percentaString(rgba) {
+function percentaString(rgba, alpha) {
    var r = Math.round(rgba[0]/255 * 100),
        g = Math.round(rgba[1]/255 * 100),
        b = Math.round(rgba[2]/255 * 100);
-   return "rgba(" + r + "%, " + g + "%, " + b + "%, " + (rgba[3] || 1) + ")";
+   return "rgba(" + r + "%, " + g + "%, " + b + "%, " + (alpha || rgba[3] || 1) + ")";
 }
 
-function hslString(hsla) {
-   if (hsla[3] && hsla[3] < 1) {
-      return hslaString(hsla);
+function hslString(hsla, alpha) {
+   if (alpha || (hsla[3] && hsla[3] < 1)) {
+      return hslaString(hsla, alpha);
    }
    return "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)";
 }
 
-function hslaString(hsla) {
+function hslaString(hsla, alpha) {
    return "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, "
-           + (hsla[3] || 1) + ")";   
+           + (alpha || hsla[3] || 1) + ")";   
 }
 
 function keyword(rgb) {
