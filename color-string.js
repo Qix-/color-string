@@ -19,6 +19,9 @@ module.exports = {
 }
 
 function getRgba(string) {
+   if (!string) {
+      return;
+   }
    var abbr =  /^#([a-fA-F0-9]{3})$/,
        hex =  /^#([a-fA-F0-9]{6})$/,
        rgba = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d\.]+)\s*)?\)$/,
@@ -76,6 +79,9 @@ function getRgba(string) {
 }
 
 function getHsla(string) {
+   if (!string) {
+      return;
+   }
    var hsl = /^hsla?\(\s*(\d+)\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
    var match = string.match(hsl);
    if (match) {
@@ -112,7 +118,7 @@ function hexString(rgb) {
 }
 
 function rgbString(rgba, alpha) {
-   if (alpha || (rgba[3] && rgba[3] < 1)) {
+   if (alpha < 1 || (rgba[3] && rgba[3] < 1)) {
       return rgbaString(rgba, alpha);
    }
    return "rgb(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ")";
@@ -124,7 +130,7 @@ function rgbaString(rgba, alpha) {
 }
 
 function percentString(rgba, alpha) {
-   if (alpha || (rgba[3] && rgba[3] < 1)) {
+   if (alpha < 1 || (rgba[3] && rgba[3] < 1)) {
       return percentaString(rgba, alpha);
    } 
    var r = Math.round(rgba[0]/255 * 100),
@@ -142,7 +148,7 @@ function percentaString(rgba, alpha) {
 }
 
 function hslString(hsla, alpha) {
-   if (alpha || (hsla[3] && hsla[3] < 1)) {
+   if (alpha < 1 || (hsla[3] && hsla[3] < 1)) {
       return hslaString(hsla, alpha);
    }
    return "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)";
