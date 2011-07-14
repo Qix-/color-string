@@ -68,7 +68,7 @@ function getRgba(string) {
    for (var i = 0; i < rgb.length; i++) {
       rgb[i] = scale(rgb[i], 0, 255);
    }
-   if (!a) {
+   if (!a && a != 0) {
       a = 1;
    }
    else {
