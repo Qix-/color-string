@@ -16,6 +16,7 @@ assert.equal(string.getAlpha("hsla(244, 100%, 100%, 0.6)"), 0.6);
 
 // alpha
 assert.deepEqual(string.getRgba("rgba(200, 20, 233, 0.2)"), [200, 20, 233, 0.2]);
+assert.deepEqual(string.getRgba("rgba(200, 20, 233, 0)"), [200, 20, 233, 0]);
 assert.deepEqual(string.getRgba("rgba(100%, 30%, 90%, 0.2)"), [255, 77, 229, 0.2]);
 assert.deepEqual(string.getHsla("hsla(200, 20%, 33%, 0.2)"), [200, 20, 33, 0.2]);
 
