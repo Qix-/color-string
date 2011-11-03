@@ -94,11 +94,13 @@ function getHsla(string) {
 }
 
 function getRgb(string) {
-   return getRgba(string).slice(0, 3);
+   var rgba = getRgba(string);
+   return rgba && rgba.slice(0, 3);
 }
 
 function getHsl(string) {
-   return getHsla(string).slice(0, 3);
+  var hsla = getHsla(string);
+  return hsla && hsla.slice(0, 3);
 }
 
 function getAlpha(string) {
