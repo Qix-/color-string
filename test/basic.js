@@ -38,23 +38,34 @@ assert.strictEqual(string.getRgba("hsl(100, 10%, 10%)"), undefined);
 assert.equal(string.hexString([255, 10, 35]), "#FF0A23");
 
 assert.equal(string.rgbString([255, 10, 35]), "rgb(255, 10, 35)");
+assert.equal(string.rgbString([255, 10, 35, 0]), "rgba(255, 10, 35, 0)");
 assert.equal(string.rgbString([255, 10, 35, 0.3]), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbString([255, 10, 35], 0.3), "rgba(255, 10, 35, 0.3)");
+assert.equal(string.rgbaString([255, 10, 35, 0]), "rgba(255, 10, 35, 0)");
 assert.equal(string.rgbaString([255, 10, 35, 0.3]), "rgba(255, 10, 35, 0.3)");
+assert.equal(string.rgbaString([255, 10, 35], 0), "rgba(255, 10, 35, 0)");
 assert.equal(string.rgbaString([255, 10, 35], 0.3), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35]), "rgba(255, 10, 35, 1)");
 
 assert.equal(string.percentString([255, 10, 35]), "rgb(100%, 4%, 14%)");
+assert.equal(string.percentString([255, 10, 35, 0]), "rgba(100%, 4%, 14%, 0)");
 assert.equal(string.percentString([255, 10, 35, 0.3]), "rgba(100%, 4%, 14%, 0.3)");
+assert.equal(string.percentString([255, 10, 35], 0), "rgba(100%, 4%, 14%, 0)");
 assert.equal(string.percentString([255, 10, 35], 0.3), "rgba(100%, 4%, 14%, 0.3)");
+assert.equal(string.percentaString([255, 10, 35, 0]), "rgba(100%, 4%, 14%, 0)");
 assert.equal(string.percentaString([255, 10, 35, 0.3]), "rgba(100%, 4%, 14%, 0.3)");
+assert.equal(string.percentaString([255, 10, 35], 0), "rgba(100%, 4%, 14%, 0)");
 assert.equal(string.percentaString([255, 10, 35], 0.3), "rgba(100%, 4%, 14%, 0.3)");
 assert.equal(string.percentaString([255, 10, 35]), "rgba(100%, 4%, 14%, 1)");
 
 assert.equal(string.hslString([280, 40, 60]), "hsl(280, 40%, 60%)");
+assert.equal(string.hslString([280, 40, 60, 0]), "hsla(280, 40%, 60%, 0)");
 assert.equal(string.hslString([280, 40, 60, 0.3]), "hsla(280, 40%, 60%, 0.3)");
+assert.equal(string.hslString([280, 40, 60], 0), "hsla(280, 40%, 60%, 0)");
 assert.equal(string.hslString([280, 40, 60], 0.3), "hsla(280, 40%, 60%, 0.3)");
+assert.equal(string.hslaString([280, 40, 60, 0]), "hsla(280, 40%, 60%, 0)");
 assert.equal(string.hslaString([280, 40, 60, 0.3]), "hsla(280, 40%, 60%, 0.3)");
+assert.equal(string.hslaString([280, 40, 60], 0), "hsla(280, 40%, 60%, 0)");
 assert.equal(string.hslaString([280, 40, 60], 0.3), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslaString([280, 40, 60]), "hsla(280, 40%, 60%, 1)");
 

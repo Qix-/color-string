@@ -18,6 +18,14 @@ module.exports = {
    keyword: keyword
 }
 
+function coalesce() {
+   for (var i = 0; i < arguments.length; i++) {
+      if (arguments[i] != null) {
+         return arguments[i];
+      }
+   }
+}
+
 function getRgba(string) {
    if (!string) {
       return;
@@ -118,7 +126,7 @@ function hexString(rgb) {
 }
 
 function rgbString(rgba, alpha) {
-   if (alpha < 1 || (rgba[3] && rgba[3] < 1)) {
+   if (alpha < 1 || (rgba[3] != null && rgba[3] < 1)) {
       return rgbaString(rgba, alpha);
    }
    return "rgb(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ")";
@@ -126,29 +134,29 @@ function rgbString(rgba, alpha) {
 
 function rgbaString(rgba, alpha) {
    return "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2]
-           + ", " + (alpha || rgba[3] || 1) + ")";
+           + ", " + coalesce(alpha, rgba[3], 1) + ")";
 }
 
 function percentString(rgba, alpha) {
-   if (alpha < 1 || (rgba[3] && rgba[3] < 1)) {
+   if (alpha < 1 || (rgba[3] != null && rgba[3] < 1)) {
       return percentaString(rgba, alpha);
    } 
    var r = Math.round(rgba[0]/255 * 100),
        g = Math.round(rgba[1]/255 * 100),
        b = Math.round(rgba[2]/255 * 100);
 
-   return "rgb(" + r + "%, " + g + "%, " + b + "%)"; 
+   return "rgb(" + r + "%, " + g + "%, " + b + "%)";
 }
 
 function percentaString(rgba, alpha) {
    var r = Math.round(rgba[0]/255 * 100),
        g = Math.round(rgba[1]/255 * 100),
        b = Math.round(rgba[2]/255 * 100);
-   return "rgba(" + r + "%, " + g + "%, " + b + "%, " + (alpha || rgba[3] || 1) + ")";
+   return "rgba(" + r + "%, " + g + "%, " + b + "%, " + coalesce(alpha, rgba[3], 1) + ")";
 }
 
 function hslString(hsla, alpha) {
-   if (alpha < 1 || (hsla[3] && hsla[3] < 1)) {
+   if (alpha < 1 || (hsla[3] != null && hsla[3] < 1)) {
       return hslaString(hsla, alpha);
    }
    return "hsl(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%)";
@@ -156,7 +164,7 @@ function hslString(hsla, alpha) {
 
 function hslaString(hsla, alpha) {
    return "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, "
-           + (alpha || hsla[3] || 1) + ")";   
+           + coalesce(alpha, hsla[3], 1) + ")";
 }
 
 function keyword(rgb) {
