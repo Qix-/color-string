@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/harthur/color-string.png)](http://travis-ci.org/harthur/color-string)
 # color-string
 color-string is a library for parsing and generating CSS color strings.
 
