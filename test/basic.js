@@ -43,6 +43,7 @@ assert.equal(string.rgbString([255, 10, 35], 0.3), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35, 0.3]), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35], 0.3), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35]), "rgba(255, 10, 35, 1)");
+assert.equal(string.rgbaString([255, 10, 35, 0]), "rgba(255, 10, 35, 0)");
 
 assert.equal(string.percentString([255, 10, 35]), "rgb(100%, 4%, 14%)");
 assert.equal(string.percentString([255, 10, 35, 0.3]), "rgba(100%, 4%, 14%, 0.3)");
