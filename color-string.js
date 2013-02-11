@@ -125,8 +125,11 @@ function rgbString(rgba, alpha) {
 }
 
 function rgbaString(rgba, alpha) {
+   if (alpha===undefined) {
+      alpha = (rgba[3] !== undefined ? rgba[3] : 1);
+   }
    return "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2]
-           + ", " + (alpha || rgba[3] || 1) + ")";
+           + ", " + alpha + ")";
 }
 
 function percentString(rgba, alpha) {
