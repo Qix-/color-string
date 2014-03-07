@@ -57,6 +57,7 @@ assert.equal(string.hslString([280, 40, 60, 0.3]), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslString([280, 40, 60], 0.3), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslaString([280, 40, 60, 0.3]), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslaString([280, 40, 60], 0.3), "hsla(280, 40%, 60%, 0.3)");
+assert.equal(string.hslaString([280, 40, 60], 0), "hsla(280, 40%, 60%, 0)");
 assert.equal(string.hslaString([280, 40, 60]), "hsla(280, 40%, 60%, 1)");
 
 assert.equal(string.keyword([255, 255, 0]), "yellow");

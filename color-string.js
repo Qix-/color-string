@@ -125,7 +125,7 @@ function rgbString(rgba, alpha) {
 }
 
 function rgbaString(rgba, alpha) {
-   if (alpha===undefined) {
+   if (alpha === undefined) {
       alpha = (rgba[3] !== undefined ? rgba[3] : 1);
    }
    return "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2]
@@ -158,8 +158,11 @@ function hslString(hsla, alpha) {
 }
 
 function hslaString(hsla, alpha) {
+   if (alpha === undefined) {
+      alpha = (hsla[3] !== undefined ? hsla[3] : 1);
+   }
    return "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, "
-           + (alpha || hsla[3] || 1) + ")";
+           + alpha + ")";
 }
 
 function keyword(rgb) {
