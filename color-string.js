@@ -7,7 +7,7 @@ module.exports = {
    getRgb: getRgb,
    getHsl: getHsl,
    getAlpha: getAlpha,
-   
+
    hexString: hexString,
    rgbString: rgbString,
    rgbaString: rgbaString,
@@ -27,7 +27,7 @@ function getRgba(string) {
        rgba = /^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d\.]+)\s*)?\)$/,
        per = /^rgba?\(\s*([\d\.]+)\%\s*,\s*([\d\.]+)\%\s*,\s*([\d\.]+)\%\s*(?:,\s*([\d\.]+)\s*)?\)$/,
        keyword = /(\D+)/;
-       
+
    var rgb = [0, 0, 0],
        a = 1,
        match = string.match(abbr);
@@ -64,11 +64,11 @@ function getRgba(string) {
          return;
       }
    }
-   
+
    for (var i = 0; i < rgb.length; i++) {
       rgb[i] = scale(rgb[i], 0, 255);
    }
-   if (!a) {
+   if (!a && a != 0) {
       a = 1;
    }
    else {
@@ -127,19 +127,22 @@ function rgbString(rgba, alpha) {
 }
 
 function rgbaString(rgba, alpha) {
+   if (alpha === undefined) {
+      alpha = (rgba[3] !== undefined ? rgba[3] : 1);
+   }
    return "rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2]
-           + ", " + (alpha || rgba[3] || 1) + ")";
+           + ", " + alpha + ")";
 }
 
 function percentString(rgba, alpha) {
    if (alpha < 1 || (rgba[3] && rgba[3] < 1)) {
       return percentaString(rgba, alpha);
-   } 
+   }
    var r = Math.round(rgba[0]/255 * 100),
        g = Math.round(rgba[1]/255 * 100),
        b = Math.round(rgba[2]/255 * 100);
 
-   return "rgb(" + r + "%, " + g + "%, " + b + "%)"; 
+   return "rgb(" + r + "%, " + g + "%, " + b + "%)";
 }
 
 function percentaString(rgba, alpha) {
@@ -157,8 +160,11 @@ function hslString(hsla, alpha) {
 }
 
 function hslaString(hsla, alpha) {
+   if (alpha === undefined) {
+      alpha = (hsla[3] !== undefined ? hsla[3] : 1);
+   }
    return "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, "
-           + (alpha || hsla[3] || 1) + ")";   
+           + alpha + ")";
 }
 
 function keyword(rgb) {

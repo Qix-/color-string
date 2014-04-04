@@ -16,6 +16,7 @@ assert.equal(string.getAlpha("hsla(244, 100%, 100%, 0.6)"), 0.6);
 
 // alpha
 assert.deepEqual(string.getRgba("rgba(200, 20, 233, 0.2)"), [200, 20, 233, 0.2]);
+assert.deepEqual(string.getRgba("rgba(200, 20, 233, 0)"), [200, 20, 233, 0]);
 assert.deepEqual(string.getRgba("rgba(100%, 30%, 90%, 0.2)"), [255, 77, 229, 0.2]);
 assert.deepEqual(string.getHsla("hsla(200, 20%, 33%, 0.2)"), [200, 20, 33, 0.2]);
 
@@ -42,6 +43,7 @@ assert.equal(string.rgbString([255, 10, 35], 0.3), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35, 0.3]), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35], 0.3), "rgba(255, 10, 35, 0.3)");
 assert.equal(string.rgbaString([255, 10, 35]), "rgba(255, 10, 35, 1)");
+assert.equal(string.rgbaString([255, 10, 35, 0]), "rgba(255, 10, 35, 0)");
 
 assert.equal(string.percentString([255, 10, 35]), "rgb(100%, 4%, 14%)");
 assert.equal(string.percentString([255, 10, 35, 0.3]), "rgba(100%, 4%, 14%, 0.3)");
@@ -55,6 +57,7 @@ assert.equal(string.hslString([280, 40, 60, 0.3]), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslString([280, 40, 60], 0.3), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslaString([280, 40, 60, 0.3]), "hsla(280, 40%, 60%, 0.3)");
 assert.equal(string.hslaString([280, 40, 60], 0.3), "hsla(280, 40%, 60%, 0.3)");
+assert.equal(string.hslaString([280, 40, 60], 0), "hsla(280, 40%, 60%, 0)");
 assert.equal(string.hslaString([280, 40, 60]), "hsla(280, 40%, 60%, 1)");
 
 assert.equal(string.keyword([255, 255, 0]), "yellow");
