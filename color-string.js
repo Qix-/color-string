@@ -6,6 +6,7 @@ module.exports = {
    getHsla: getHsla,
    getRgb: getRgb,
    getHsl: getHsl,
+   getHwb: getHwb,
    getAlpha: getAlpha,
 
    hexString: hexString,
@@ -15,6 +16,7 @@ module.exports = {
    percentaString: percentaString,
    hslString: hslString,
    hslaString: hslaString,
+   hwbString: hwbString,
    keyword: keyword
 }
 
@@ -93,6 +95,21 @@ function getHsla(string) {
    }
 }
 
+function getHwb(string) {
+   if (!string) {
+      return;
+   }
+   var hwb = /^hwb\(\s*(\d+)\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
+   var match = string.match(hwb);
+   if (match) {
+      var h = scale(parseInt(match[1]), 0, 360),
+          w = scale(parseFloat(match[2]), 0, 100),
+          b = scale(parseFloat(match[3]), 0, 100),
+          a = scale(parseFloat(match[4]) || 1, 0, 1);
+      return [h, w, b, a];
+   }
+}
+
 function getRgb(string) {
    var rgba = getRgba(string);
    return rgba && rgba.slice(0, 3);
@@ -109,6 +126,9 @@ function getAlpha(string) {
       return vals[3];
    }
    else if (vals = getHsla(string)) {
+      return vals[3];
+   }
+   else if (vals = getHwb(string)) {
       return vals[3];
    }
 }
@@ -165,6 +185,16 @@ function hslaString(hsla, alpha) {
    }
    return "hsla(" + hsla[0] + ", " + hsla[1] + "%, " + hsla[2] + "%, "
            + alpha + ")";
+}
+
+// hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
+// (hwb have alpha optional & 1 is default value)
+function hwbString(hwb, alpha) {
+   if (alpha === undefined) {
+      alpha = (hwb[3] !== undefined ? hwb[3] : 1);
+   }
+   return "hwb(" + hwb[0] + ", " + hwb[1] + "%, " + hwb[2] + "%"
+           + (alpha !== undefined && alpha !== 1 ? ", " + alpha : "") + ")";
 }
 
 function keyword(rgb) {
