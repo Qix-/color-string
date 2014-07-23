@@ -1,7 +1,7 @@
 {
     "name": "color-string",
     "description": "Parser and generator for CSS color strings",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "author": "Heather Arthur <fayearthur@gmail.com>",
     "repository": {
         "type": "git",
@@ -9,7 +9,7 @@
     },
     "main": "./color-string",
     "dependencies": {
-        "color-convert": "0.2.x"
+        "color-convert": "0.5.x"
     },
     "devDependencies": {
         "browserify": ">=1.0.0",
