@@ -84,7 +84,7 @@ function getHsla(string) {
    if (!string) {
       return;
    }
-   var hsl = /^hsla?\(\s*(\d+)\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
+   var hsl = /^hsla?\(\s*(\d+)(?:deg)?\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
    var match = string.match(hsl);
    if (match) {
       var h = scale(parseInt(match[1]), 0, 360),
@@ -99,7 +99,7 @@ function getHwb(string) {
    if (!string) {
       return;
    }
-   var hwb = /^hwb\(\s*(\d+)\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
+   var hwb = /^hwb\(\s*(\d+)(?:deg)?\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
    var match = string.match(hwb);
    if (match) {
       var h = scale(parseInt(match[1]), 0, 360),
