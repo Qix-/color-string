@@ -8,7 +8,9 @@ assert.deepEqual(string.getRgba("rgb(100%, 30%, 90%)"), [255, 77, 229, 1]);
 assert.deepEqual(string.getRgba("blue"), [0, 0, 255, 1]);
 assert.deepEqual(string.getRgba("transparent"), [0, 0, 0, 0]);
 assert.deepEqual(string.getHsla("hsl(240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
+assert.deepEqual(string.getHsla("hsl(240deg, 100%, 50.5%)"), [240, 100, 50.5, 1]);
 assert.deepEqual(string.getHwb("hwb(240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
+assert.deepEqual(string.getHwb("hwb(240deg, 100%, 50.5%)"), [240, 100, 50.5, 1]);
 
 assert.equal(string.getAlpha("rgb(244, 233, 100)"), 1);
 assert.equal(string.getAlpha("rgba(244, 233, 100, 0.5)"), 0.5);
