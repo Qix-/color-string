@@ -31,6 +31,6 @@ colorString.hslString([360, 100, 100])   // "hsl(360, 100%, 100%)"
 For [node](http://nodejs.org) with [npm](http://npmjs.org):
 
 	npm install color-string
-	
+
 ### browser
-Download the latest [color-string.js](http://github.com/harthur/color-string/downloads). The `colorString` object is exported.
+Download the latest [color-string.js](https://github.com/harthur/color-string/tree/gh-pages). The `colorString` object is exported.
