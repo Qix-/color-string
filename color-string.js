@@ -76,7 +76,7 @@ function getRgba(string) {
    else {
       a = scale(a, 0, 1);
    }
-   rgb.push(a);
+   rgb[3] = a;
    return rgb;
 }
 
