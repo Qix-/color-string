@@ -1,5 +1,5 @@
 /* MIT license */
-var convert = require("color-convert");
+var colorNames = require('color-name');
 
 module.exports = {
    getRgba: getRgba,
@@ -61,7 +61,7 @@ function getRgba(string) {
       if (match[1] == "transparent") {
          return [0, 0, 0, 0];
       }
-      rgb = convert.keyword2rgb(match[1]);
+      rgb = colorNames[match[1]];
       if (!rgb) {
          return;
       }
@@ -198,7 +198,7 @@ function hwbString(hwb, alpha) {
 }
 
 function keyword(rgb) {
-   return convert.rgb2keyword(rgb.slice(0, 3));
+  return reverseNames[rgb.slice(0, 3)];
 }
 
 // helpers
@@ -209,4 +209,11 @@ function scale(num, min, max) {
 function hexDouble(num) {
   var str = num.toString(16).toUpperCase();
   return (str.length < 2) ? "0" + str : str;
+}
+
+
+//create a list of reverse color names
+var reverseNames = {};
+for (var name in colorNames) {
+  reverseNames[colorNames[name]] = name;
 }

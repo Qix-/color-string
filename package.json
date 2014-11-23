@@ -3,15 +3,19 @@
   "description": "Parser and generator for CSS color strings",
   "version": "0.2.1",
   "author": "Heather Arthur <fayearthur@gmail.com>",
+  "contributors": "Dyma Ywanov <dfcreative@gmail.com>",
   "repository": {
     "type": "git",
     "url": "http://github.com/harthur/color-string.git"
   },
+  "scripts": {
+    "test": "node test/basic.js"
+  },
   "main": "./color-string",
   "dependencies": {
-    "color-convert": "0.5.x",
     "grunt-contrib-uglify": "^0.5.1",
-    "browserify": "^5.10.0"
+    "browserify": "^5.10.0",
+    "color-name": "0.x"
   },
   "devDependencies": {
     "browserify": ">=1.0.0",
