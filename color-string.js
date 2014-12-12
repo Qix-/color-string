@@ -215,5 +215,5 @@ function hexDouble(num) {
 //create a list of reverse color names
 var reverseNames = {};
 for (var name in colorNames) {
-  reverseNames[colorNames[name]] = name;
+   reverseNames[colorNames[name]] = name;
 }
