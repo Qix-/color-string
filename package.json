@@ -1,7 +1,7 @@
 {
   "name": "color-string",
   "description": "Parser and generator for CSS color strings",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Heather Arthur <fayearthur@gmail.com>",
   "contributors": "Dyma Ywanov <dfcreative@gmail.com>",
   "repository": {
