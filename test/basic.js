@@ -12,9 +12,19 @@ assert.deepEqual(string.getHsla("hsl(240deg, 100%, 50.5%)"), [240, 100, 50.5, 1]
 assert.deepEqual(string.getHwb("hwb(240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
 assert.deepEqual(string.getHwb("hwb(240deg, 100%, 50.5%)"), [240, 100, 50.5, 1]);
 
+// with sign
+assert.deepEqual(string.getRgba("rgb(-244, +233, -100)"), [0, 233, 0, 1]);
+assert.deepEqual(string.getHsla("hsl(+240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
+assert.deepEqual(string.getRgba("rgba(200, +20, -233, -0.0)"), [200, 20, 0, 0]);
+assert.deepEqual(string.getRgba("rgba(200, +20, -233, -0.0)"), [200, 20, 0, 0]);
+assert.deepEqual(string.getHsla("hsla(+200, 100%, 50%, -0.2)"), [200, 100, 50, 0]);
+assert.deepEqual(string.getHwb("hwb(+240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
+assert.deepEqual(string.getHwb("hwb(-240deg, 100%, 50.5%)"), [0, 100, 50.5, 1]);
+assert.deepEqual(string.getHwb("hwb(-240deg, 100%, 50.5%, +0.6)"), [0, 100, 50.5, 0.6]);
+
 //subsequent return values should not change array
 assert.deepEqual(string.getRgba("blue"), [0, 0, 255, 1]);
-assert.deepEqual(string.getRgba("blue"), [0, 0, 255, 1]); 
+assert.deepEqual(string.getRgba("blue"), [0, 0, 255, 1]);
 
 assert.equal(string.getAlpha("rgb(244, 233, 100)"), 1);
 assert.equal(string.getAlpha("rgba(244, 233, 100, 0.5)"), 0.5);
