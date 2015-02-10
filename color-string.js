@@ -87,10 +87,11 @@ function getHsla(string) {
    var hsl = /^hsla?\(\s*(\d+)(?:deg)?\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
    var match = string.match(hsl);
    if (match) {
+      var alpha = parseFloat(match[4]);
       var h = scale(parseInt(match[1]), 0, 360),
           s = scale(parseFloat(match[2]), 0, 100),
           l = scale(parseFloat(match[3]), 0, 100),
-          a = scale(parseFloat(match[4]) || 1, 0, 1);
+          a = scale(isNaN(alpha) ? 1 : alpha, 0, 1);
       return [h, s, l, a];
    }
 }
@@ -102,10 +103,11 @@ function getHwb(string) {
    var hwb = /^hwb\(\s*(\d+)(?:deg)?\s*,\s*([\d\.]+)%\s*,\s*([\d\.]+)%\s*(?:,\s*([\d\.]+)\s*)?\)/;
    var match = string.match(hwb);
    if (match) {
+    var alpha = parseFloat(match[4]);
       var h = scale(parseInt(match[1]), 0, 360),
           w = scale(parseFloat(match[2]), 0, 100),
           b = scale(parseFloat(match[3]), 0, 100),
-          a = scale(parseFloat(match[4]) || 1, 0, 1);
+          a = scale(isNaN(alpha) ? 1 : alpha, 0, 1);
       return [h, w, b, a];
    }
 }
