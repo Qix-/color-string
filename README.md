@@ -1,8 +1,20 @@
 # color-string
-color-string is a library for parsing and generating CSS color strings.
 
-#### parsing:
-```javascript
+> library for parsing and generating CSS color strings.
+
+## Install
+
+For [node](http://nodejs.org) with [npm](http://npmjs.org):
+
+```console
+$ npm install color-string
+```
+
+## Usage
+
+## Parsing
+
+```js
 colorString.getRgb("#FFF")  // [255, 255, 255]
 colorString.getRgb("blue")  // [0, 0, 255]
 
@@ -14,8 +26,10 @@ colorString.getHsla("hsla(360, 60%, 50%, 0.4)")  // [360, 60, 50, 0.4]
 
 colorString.getAlpha("rgba(200, 0, 12, 0.6)")    // 0.6
 ```
-#### generating:
-```javascript
+
+#### Generation
+
+```js
 colorString.hexString([255, 255, 255])   // "#FFFFFF"
 colorString.rgbString([255, 255, 255])   // "rgb(255, 255, 255)"
 colorString.rgbString([0, 0, 255, 0.4])  // "rgba(0, 0, 255, 0.4)"
@@ -24,13 +38,3 @@ colorString.percentString([0, 0, 255])   // "rgb(0%, 0%, 100%)"
 colorString.keyword([255, 255, 0])       // "yellow"
 colorString.hslString([360, 100, 100])   // "hsl(360, 100%, 100%)"
 ```
-
-# Install
-
-### node
-For [node](http://nodejs.org) with [npm](http://npmjs.org):
-
-	npm install color-string
-
-### browser
-Download the latest [color-string.js](https://github.com/harthur/color-string/tree/gh-pages). The `colorString` object is exported.
