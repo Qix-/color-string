@@ -4,7 +4,7 @@
 
 ## Install
 
-For [node](http://nodejs.org) with [npm](http://npmjs.org):
+With [npm](http://npmjs.org/):
 
 ```console
 $ npm install color-string
