@@ -43,6 +43,9 @@ assert.deepEqual(string.getHwb("hwb(200, 20%, 33%, 0.2)"), [200, 20, 33, 0.2]);
 assert.deepEqual(string.getRgb("#fef"), [255, 238, 255]);
 assert.deepEqual(string.getRgb("rgba(200, 20, 233, 0.2)"), [200, 20, 233]);
 assert.deepEqual(string.getHsl("hsl(240, 100%, 50.5%)"), [240, 100, 50.5]);
+assert.deepEqual(string.getRgba('rgba(0,0,0,0)'), [0, 0, 0, 0]);
+assert.deepEqual(string.getHsla('hsla(0,0%,0%,0)'), [0, 0, 0, 0]);
+assert.deepEqual(string.getHwb("hwb(400, 10%, 200%, 0)"), [360, 10, 100, 0]);
 
 // range
 assert.deepEqual(string.getRgba("rgba(300, 600, 100, 3)"), [255, 255, 100, 1]);
