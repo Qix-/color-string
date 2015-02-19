@@ -12,7 +12,7 @@ $ npm install color-string
 
 ## Usage
 
-## Parsing
+### Parsing
 
 ```js
 colorString.getRgb("#FFF")  // [255, 255, 255]
@@ -27,7 +27,7 @@ colorString.getHsla("hsla(360, 60%, 50%, 0.4)")  // [360, 60, 50, 0.4]
 colorString.getAlpha("rgba(200, 0, 12, 0.6)")    // 0.6
 ```
 
-#### Generation
+### Generation
 
 ```js
 colorString.hexString([255, 255, 255])   // "#FFFFFF"
