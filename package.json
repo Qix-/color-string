@@ -1,9 +1,12 @@
 {
   "name": "color-string",
   "description": "Parser and generator for CSS color strings",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "author": "Heather Arthur <fayearthur@gmail.com>",
-  "contributors": "Dyma Ywanov <dfcreative@gmail.com>",
+  "contributors": [
+    "Maxime Thirouin",
+    "Dyma Ywanov <dfcreative@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/harthur/color-string.git"
@@ -14,12 +17,9 @@
   "license": "MIT",
   "main": "./color-string",
   "dependencies": {
-    "color-name": "1.0.x"
+    "color-name": "^1.0.0"
   },
   "devDependencies": {
-    "browserify": ">=1.0.0",
-    "uglify-js": "1.0.x",
-    "grunt": "^0.4.5"
   },
   "keywords": [
     "color",
