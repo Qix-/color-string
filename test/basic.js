@@ -18,9 +18,14 @@ assert.deepEqual(string.getHsla("hsl(+240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
 assert.deepEqual(string.getRgba("rgba(200, +20, -233, -0.0)"), [200, 20, 0, 0]);
 assert.deepEqual(string.getRgba("rgba(200, +20, -233, -0.0)"), [200, 20, 0, 0]);
 assert.deepEqual(string.getHsla("hsla(+200, 100%, 50%, -0.2)"), [200, 100, 50, 0]);
+assert.deepEqual(string.getHsla("hsla(-10.0, 100%, 50%, -0.2)"), [350, 100, 50, 0]);
+assert.deepEqual(string.getHsla("hsla(.5, 100%, 50%, -0.2)"), [.5, 100, 50, 0]);
 assert.deepEqual(string.getHwb("hwb(+240, 100%, 50.5%)"), [240, 100, 50.5, 1]);
-assert.deepEqual(string.getHwb("hwb(-240deg, 100%, 50.5%)"), [0, 100, 50.5, 1]);
-assert.deepEqual(string.getHwb("hwb(-240deg, 100%, 50.5%, +0.6)"), [0, 100, 50.5, 0.6]);
+assert.deepEqual(string.getHwb("hwb(-240deg, 100%, 50.5%)"), [120, 100, 50.5, 1]);
+assert.deepEqual(string.getHwb("hwb(-240deg, 100%, 50.5%, +0.6)"), [120, 100, 50.5, 0.6]);
+assert.deepEqual(string.getHwb("hwb(10.0deg, 100%, 50.5%)"), [10, 100, 50.5, 1]);
+assert.deepEqual(string.getHwb("hwb(-.5, 100%, 50.5%)"), [359.5, 100, 50.5, 1]);
+assert.deepEqual(string.getHwb("hwb(-10.0deg, 100%, 50.5%, +0.6)"), [350, 100, 50.5, 0.6]);
 
 //subsequent return values should not change array
 assert.deepEqual(string.getRgba("blue"), [0, 0, 255, 1]);
@@ -45,13 +50,13 @@ assert.deepEqual(string.getRgb("rgba(200, 20, 233, 0.2)"), [200, 20, 233]);
 assert.deepEqual(string.getHsl("hsl(240, 100%, 50.5%)"), [240, 100, 50.5]);
 assert.deepEqual(string.getRgba('rgba(0,0,0,0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.getHsla('hsla(0,0%,0%,0)'), [0, 0, 0, 0]);
-assert.deepEqual(string.getHwb("hwb(400, 10%, 200%, 0)"), [360, 10, 100, 0]);
+assert.deepEqual(string.getHwb("hwb(400, 10%, 200%, 0)"), [40, 10, 100, 0]);
 
 // range
 assert.deepEqual(string.getRgba("rgba(300, 600, 100, 3)"), [255, 255, 100, 1]);
 assert.deepEqual(string.getRgba("rgba(8000%, 100%, 333%, 88)"), [255, 255, 255, 1]);
-assert.deepEqual(string.getHsla("hsla(400, 10%, 200%, 10)"), [360, 10, 100, 1]);
-assert.deepEqual(string.getHwb("hwb(400, 10%, 200%, 10)"), [360, 10, 100, 1]);
+assert.deepEqual(string.getHsla("hsla(400, 10%, 200%, 10)"), [40, 10, 100, 1]);
+assert.deepEqual(string.getHwb("hwb(400, 10%, 200%, 10)"), [40, 10, 100, 1]);
 
 // invalid
 assert.strictEqual(string.getRgba("yellowblue"), undefined);
