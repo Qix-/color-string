@@ -84,11 +84,11 @@ function getHsla(string) {
    if (!string) {
       return;
    }
-   var hsl = /^hsla?\(\s*([+-]?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)/;
+   var hsl = /^hsla?\(\s*([+-]?\d+(?:\.\d*)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)/;
    var match = string.match(hsl);
    if (match) {
       var alpha = parseFloat(match[4]);
-      var h = scale(parseInt(match[1]), 0, 360),
+      var h = ((parseFloat(match[1]) % 360) + 360) % 360,
           s = scale(parseFloat(match[2]), 0, 100),
           l = scale(parseFloat(match[3]), 0, 100),
           a = scale(isNaN(alpha) ? 1 : alpha, 0, 1);
@@ -100,11 +100,11 @@ function getHwb(string) {
    if (!string) {
       return;
    }
-   var hwb = /^hwb\(\s*([+-]?\d+)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)/;
+   var hwb = /^hwb\(\s*([+-]?\d+(?:\.\d*)?)(?:deg)?\s*,\s*([+-]?[\d\.]+)%\s*,\s*([+-]?[\d\.]+)%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)/;
    var match = string.match(hwb);
    if (match) {
-    var alpha = parseFloat(match[4]);
-      var h = scale(parseInt(match[1]), 0, 360),
+      var alpha = parseFloat(match[4]);
+      var h = ((parseFloat(match[1]) % 360) + 360) % 360,
           w = scale(parseFloat(match[2]), 0, 100),
           b = scale(parseFloat(match[3]), 0, 100),
           a = scale(isNaN(alpha) ? 1 : alpha, 0, 1);
