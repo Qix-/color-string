@@ -1,6 +1,6 @@
 # color-string
 
-[![Build Status](https://travis-ci.org/harthur/color-string.svg?branch=master)](https://travis-ci.org/harthur/color-string)
+[![Build Status](https://travis-ci.org/MoOx/color-string.svg?branch=master)](https://travis-ci.org/MoOx/color-string)
 
 > library for parsing and generating CSS color strings.
 
