@@ -23,8 +23,8 @@ colorString.getRgb("blue")  // [0, 0, 255]
 colorString.getRgba("rgba(200, 60, 60, 0.3)")    // [200, 60, 60, 0.3]
 colorString.getRgba("rgb(200, 200, 200)")        // [200, 200, 200, 1]
 
-colorString.getHsl("hsl(360, 100%, 50%)")        // [360, 100, 50]
-colorString.getHsla("hsla(360, 60%, 50%, 0.4)")  // [360, 60, 50, 0.4]
+colorString.getHsl("hsl(360, 100%, 50%)")        // [0, 100, 50]
+colorString.getHsla("hsla(360, 60%, 50%, 0.4)")  // [0, 60, 50, 0.4]
 
 colorString.getAlpha("rgba(200, 0, 12, 0.6)")    // 0.6
 ```
