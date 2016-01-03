@@ -12,14 +12,21 @@
     "url": "http://github.com/harthur/color-string.git"
   },
   "scripts": {
+    "pretest": "xo",
     "test": "node test/basic.js"
   },
   "license": "MIT",
   "main": "./color-string",
+  "xo": {
+    "rules": {
+      "no-cond-assign": 0
+    }
+  },
   "dependencies": {
     "color-name": "^1.0.0"
   },
   "devDependencies": {
+    "xo": "^0.12.1"
   },
   "keywords": [
     "color",
