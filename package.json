@@ -1,15 +1,16 @@
 {
   "name": "color-string",
   "description": "Parser and generator for CSS color strings",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "Heather Arthur <fayearthur@gmail.com>",
   "contributors": [
     "Maxime Thirouin",
-    "Dyma Ywanov <dfcreative@gmail.com>"
+    "Dyma Ywanov <dfcreative@gmail.com>",
+    "Josh Junon"
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/harthur/color-string.git"
+    "url": "http://github.com/MoOx/color-string.git"
   },
   "scripts": {
     "pretest": "xo",
