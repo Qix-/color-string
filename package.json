@@ -8,10 +8,7 @@
     "Dyma Ywanov <dfcreative@gmail.com>",
     "Josh Junon"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Qix-/color-string.git"
-  },
+  "repository": "Qix-/color-string",
   "scripts": {
     "pretest": "xo",
     "test": "node test/basic.js"
