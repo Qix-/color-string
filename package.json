@@ -19,7 +19,8 @@
   ],
   "xo": {
     "rules": {
-      "no-cond-assign": 0
+      "no-cond-assign": 0,
+      "operator-linebreak": 0
     }
   },
   "dependencies": {

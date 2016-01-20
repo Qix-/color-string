@@ -127,51 +127,30 @@ cs.to.hex = function (rgb) {
 };
 
 cs.to.rgb = function () {
-	var rgb = swizzle(arguments);
-	return 'rgb(' + (rgb[0] || 0) + ', ' + (rgb[1] || 0) + ', ' + (rgb[2] || 0) + ')';
-};
-
-cs.to.rgba = function () {
 	var rgba = swizzle(arguments);
-	if (rgba.length < 4) {
-		rgba[3] = 1;
-	}
 
-	return 'rgba(' + (rgba[0] || 0) + ', ' + (rgba[1] || 0) + ', ' + (rgba[2] || 0) + ', ' + rgba[3] + ')';
+	return rgba.length < 4 || rgba[3] === 1
+		? 'rgb(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ')'
+		: 'rgba(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ', ' + rgba[3] + ')';
 };
 
 cs.to.rgb.percent = function () {
-	var rgb = swizzle(arguments);
-
-	var r = Math.round(rgb[0] / 255 * 100);
-	var g = Math.round(rgb[1] / 255 * 100);
-	var b = Math.round(rgb[2] / 255 * 100);
-
-	return 'rgb(' + r + '%, ' + g + '%, ' + b + '%)';
-};
-
-cs.to.rgba.percent = function () {
 	var rgba = swizzle(arguments);
 
 	var r = Math.round(rgba[0] / 255 * 100);
 	var g = Math.round(rgba[1] / 255 * 100);
 	var b = Math.round(rgba[2] / 255 * 100);
-	var a = rgba[3] || 1;
 
-	return 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + a + ')';
+	return rgba.length < 4 || rgba[3] === 1
+		? 'rgb(' + r + '%, ' + g + '%, ' + b + '%)'
+		: 'rgba(' + r + '%, ' + g + '%, ' + b + '%, ' + rgba[3] + ')';
 };
 
 cs.to.hsl = function () {
-	var hsl = swizzle(arguments);
-	return 'hsl(' + hsl[0] + ', ' + hsl[1] + '%, ' + hsl[2] + '%)';
-};
-
-cs.to.hsla = function () {
 	var hsla = swizzle(arguments);
-	if (hsla.length < 4) {
-		hsla[3] = 1;
-	}
-	return 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
+	return hsla.length < 4 || hsla[3] === 1
+		? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)'
+		: 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
 };
 
 // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax

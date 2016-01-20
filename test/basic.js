@@ -60,28 +60,28 @@ assert.strictEqual(string.get.rgb('hwb(100, 10%, 10%)'), null);
 assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
 
 assert.equal(string.to.rgb([255, 10, 35]), 'rgb(255, 10, 35)');
-assert.equal(string.to.rgba([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgba([255, 10, 35], 0.3), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgba([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgba([255, 10, 35], 0.3), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgba([255, 10, 35]), 'rgba(255, 10, 35, 1)');
-assert.equal(string.to.rgba([255, 10, 35, 0]), 'rgba(255, 10, 35, 0)');
+assert.equal(string.to.rgb([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
+assert.equal(string.to.rgb([255, 10, 35], 0.3), 'rgba(255, 10, 35, 0.3)');
+assert.equal(string.to.rgb([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
+assert.equal(string.to.rgb([255, 10, 35], 0.3), 'rgba(255, 10, 35, 0.3)');
+assert.equal(string.to.rgb([255, 10, 35]), 'rgb(255, 10, 35)');
+assert.equal(string.to.rgb([255, 10, 35, 0]), 'rgba(255, 10, 35, 0)');
 
 assert.equal(string.to.rgb.percent([255, 10, 35]), 'rgb(100%, 4%, 14%)');
 
-assert.equal(string.to.rgba.percent([255, 10, 35, 0.3]), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgba.percent([255, 10, 35], 0.3), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgba.percent([255, 10, 35, 0.3]), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgba.percent([255, 10, 35], 0.3), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgba.percent([255, 10, 35]), 'rgba(100%, 4%, 14%, 1)');
+assert.equal(string.to.rgb.percent([255, 10, 35, 0.3]), 'rgba(100%, 4%, 14%, 0.3)');
+assert.equal(string.to.rgb.percent([255, 10, 35], 0.3), 'rgba(100%, 4%, 14%, 0.3)');
+assert.equal(string.to.rgb.percent([255, 10, 35, 0.3]), 'rgba(100%, 4%, 14%, 0.3)');
+assert.equal(string.to.rgb.percent([255, 10, 35], 0.3), 'rgba(100%, 4%, 14%, 0.3)');
+assert.equal(string.to.rgb.percent([255, 10, 35]), 'rgb(100%, 4%, 14%)');
 
 assert.equal(string.to.hsl([280, 40, 60]), 'hsl(280, 40%, 60%)');
-assert.equal(string.to.hsla([280, 40, 60, 0.3]), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsla([280, 40, 60], 0.3), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsla([280, 40, 60, 0.3]), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsla([280, 40, 60], 0.3), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsla([280, 40, 60], 0), 'hsla(280, 40%, 60%, 0)');
-assert.equal(string.to.hsla([280, 40, 60]), 'hsla(280, 40%, 60%, 1)');
+assert.equal(string.to.hsl([280, 40, 60, 0.3]), 'hsla(280, 40%, 60%, 0.3)');
+assert.equal(string.to.hsl([280, 40, 60], 0.3), 'hsla(280, 40%, 60%, 0.3)');
+assert.equal(string.to.hsl([280, 40, 60, 0.3]), 'hsla(280, 40%, 60%, 0.3)');
+assert.equal(string.to.hsl([280, 40, 60], 0.3), 'hsla(280, 40%, 60%, 0.3)');
+assert.equal(string.to.hsl([280, 40, 60], 0), 'hsla(280, 40%, 60%, 0)');
+assert.equal(string.to.hsl([280, 40, 60]), 'hsl(280, 40%, 60%)');
 
 assert.equal(string.to.hwb([280, 40, 60]), 'hwb(280, 40%, 60%)');
 assert.equal(string.to.hwb([280, 40, 60, 0.3]), 'hwb(280, 40%, 60%, 0.3)');
