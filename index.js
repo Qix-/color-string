@@ -12,8 +12,16 @@ for (var name in colorNames) {
 }
 
 var cs = module.exports = {
-	get: {},
 	to: {}
+};
+
+cs.get = function (string) {
+	var prefix = string.substring(0, 3).toLowerCase();
+	switch (prefix) {
+		case 'hsl': return {model: 'hsl', value: cs.get.hsl(string)};
+		case 'hwb': return {model: 'hwb', value: cs.get.hwb(string)};
+		default: return {model: 'rgb', value: cs.get.rgb(string)};
+	}
 };
 
 cs.get.rgb = function (string) {
