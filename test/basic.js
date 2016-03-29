@@ -22,6 +22,10 @@ assert.deepEqual(string.get('hsl(240deg, 100%, 50.5%)'), {model: 'hsl', value: [
 assert.deepEqual(string.get('hwb(240, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 
+// invalid generic .get() calls
+assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
+assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
+
 // with sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);

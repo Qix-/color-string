@@ -17,11 +17,28 @@ var cs = module.exports = {
 
 cs.get = function (string) {
 	var prefix = string.substring(0, 3).toLowerCase();
+	var val;
+	var model;
 	switch (prefix) {
-		case 'hsl': return {model: 'hsl', value: cs.get.hsl(string)};
-		case 'hwb': return {model: 'hwb', value: cs.get.hwb(string)};
-		default: return {model: 'rgb', value: cs.get.rgb(string)};
+		case 'hsl':
+			val = cs.get.hsl(string);
+			model = 'hsl';
+			break;
+		case 'hwb':
+			val = cs.get.hwb(string);
+			model = 'hwb';
+			break;
+		default:
+			val = cs.get.rgb(string);
+			model = 'rgb';
+			break;
 	}
+
+	if (!val) {
+		return null;
+	}
+
+	return {model: model, value: val};
 };
 
 cs.get.rgb = function (string) {
