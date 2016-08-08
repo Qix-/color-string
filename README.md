@@ -31,6 +31,8 @@ colorString.get.hsl('hsla(360, 60%, 50%, 0.4)')  // [0, 60, 50, 0.4]
 
 colorString.get.hwb('hwb(60, 3%, 60%)')          // [60, 3, 60, 1]
 colorString.get.hwb('hwb(60, 3%, 60%, 0.6)')     // [60, 3, 60, 0.6]
+
+colorString.get.rgb('invalid color string')      // null
 ```
 
 ### Generation
