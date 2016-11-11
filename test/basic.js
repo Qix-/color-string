@@ -70,6 +70,9 @@ assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
 assert.strictEqual(string.get.rgb('yellowblue'), null);
 assert.strictEqual(string.get.rgb('hsl(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('hwb(100, 10%, 10%)'), null);
+assert.strictEqual(string.get.rgb('rgb(123, 255, 9)1234'), null);
+assert.strictEqual(string.get.hsl('hsl(41, 50%, 45%)1234'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
 
 // generators
 assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
