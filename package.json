@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "color-name": "^1.0.0",
-    "simple-swizzle": "^0.2.1"
+    "simple-swizzle": "^0.2.2"
   },
   "devDependencies": {
     "xo": "^0.12.1"
