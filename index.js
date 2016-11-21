@@ -48,13 +48,14 @@ cs.get.rgb = function (string) {
 
 	var abbr = /^#([a-fA-F0-9]{3})$/;
 	var hex = /^#([a-fA-F0-9]{6})$/;
-	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?\d*\.?\d+)\s*)?\)$/;
-	var per = /^rgba?\(\s*([+-]?\d*\.?\d+)\%\s*,\s*([+-]?\d*\.?\d+)\%\s*,\s*([+-]?\d*\.?\d+)\%\s*(?:,\s*([+-]?\d*\.?\d+)\s*)?\)$/;
+	var rgba = /^(rgba?)\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?\d*\.?\d+)\s*)?\)$/;
+	var per = /^(rgba?)\(\s*([+-]?\d*\.?\d+)\%\s*,\s*([+-]?\d*\.?\d+)\%\s*,\s*([+-]?\d*\.?\d+)\%\s*(?:,\s*([+-]?\d*\.?\d+)\s*)?\)$/;
 	var keyword = /(\D+)/;
 
 	var rgb = [0, 0, 0, 1];
 	var match;
 	var i;
+	var alpha;
 
 	if (match = string.match(abbr)) {
 		match = match[1];
@@ -71,20 +72,30 @@ cs.get.rgb = function (string) {
 			rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
 		}
 	} else if (match = string.match(rgba)) {
-		for (i = 0; i < 3; i++) {
-			rgb[i] = parseInt(match[i + 1], 0);
+		alpha = match[5];
+		if (alpha && match[1] === 'rgb' || !alpha && match[1] === 'rgba') {
+			return null;
 		}
 
-		if (match[4]) {
-			rgb[3] = parseFloat(match[4]);
+		for (i = 0; i < 3; i++) {
+			rgb[i] = parseInt(match[i + 2], 0);
+		}
+
+		if (alpha) {
+			rgb[3] = parseFloat(alpha);
 		}
 	} else if (match = string.match(per)) {
-		for (i = 0; i < 3; i++) {
-			rgb[i] = Math.round(parseFloat(match[i + 1]) * 2.55);
+		alpha = match[5];
+		if (alpha && match[1] === 'rgb' || !alpha && match[1] === 'rgba') {
+			return null;
 		}
 
-		if (match[4]) {
-			rgb[3] = parseFloat(match[4]);
+		for (i = 0; i < 3; i++) {
+			rgb[i] = Math.round(parseFloat(match[i + 2]) * 2.55);
+		}
+
+		if (alpha) {
+			rgb[3] = parseFloat(alpha);
 		}
 	} else if (match = string.match(keyword)) {
 		if (match[1] === 'transparent') {
@@ -115,15 +126,20 @@ cs.get.hsl = function (string) {
 		return null;
 	}
 
-	var hsl = /^hsla?\(\s*([+-]?\d*\.?\d+)(?:deg)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)\s*)?\)$/;
+	var hsl = /^(hsla?)\(\s*([+-]?\d*\.?\d+)(?:deg)?\s*,\s*([+-]?\d*\.?\d+)%\s*,\s*([+-]?\d*\.?\d+)%\s*(?:,\s*([+-]?\d*\.?\d+)\s*)?\)$/;
 	var match = string.match(hsl);
 
 	if (match) {
-		var alpha = parseFloat(match[4]);
-		var h = ((parseFloat(match[1]) % 360) + 360) % 360;
-		var s = clamp(parseFloat(match[2]), 0, 100);
-		var l = clamp(parseFloat(match[3]), 0, 100);
-		var a = clamp(isNaN(alpha) ? 1 : alpha, 0, 1);
+		var alphaString = match[5];
+		if (alphaString && match[1] === 'hsl' || !alphaString && match[1] === 'hsla') {
+			return null;
+		}
+
+		var alpha = alphaString ? parseFloat(alphaString) : 1;
+		var h = ((parseFloat(match[2]) % 360) + 360) % 360;
+		var s = clamp(parseFloat(match[3]), 0, 100);
+		var l = clamp(parseFloat(match[4]), 0, 100);
+		var a = clamp(alpha, 0, 1);
 
 		return [h, s, l, a];
 	}
