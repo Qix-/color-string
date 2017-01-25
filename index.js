@@ -100,6 +100,8 @@ cs.get.rgb = function (string) {
 		rgb[3] = 1;
 
 		return rgb;
+	} else {
+		return null;
 	}
 
 	for (i = 0; i < rgb.length; i++) {
