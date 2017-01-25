@@ -73,6 +73,9 @@ assert.strictEqual(string.get.rgb('hsl(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('hwb(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('rgb(123, 255, 9)1234'), null);
 assert.strictEqual(string.get.rgb('333333'), null);
+assert.strictEqual(string.get.rgb('1'), null);
+assert.strictEqual(string.get.rgb('1892371923879'), null);
+assert.strictEqual(string.get.rgb('444'), null);
 assert.strictEqual(string.get.hsl('hsl(41, 50%, 45%)1234'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
 
