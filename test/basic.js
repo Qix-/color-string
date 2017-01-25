@@ -25,6 +25,7 @@ assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [
 // invalid generic .get() calls
 assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
+assert.deepEqual(string.get('333333'), null);
 
 // with sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
@@ -71,6 +72,10 @@ assert.strictEqual(string.get.rgb('yellowblue'), null);
 assert.strictEqual(string.get.rgb('hsl(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('hwb(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('rgb(123, 255, 9)1234'), null);
+assert.strictEqual(string.get.rgb('333333'), null);
+assert.strictEqual(string.get.rgb('1'), null);
+assert.strictEqual(string.get.rgb('1892371923879'), null);
+assert.strictEqual(string.get.rgb('444'), null);
 assert.strictEqual(string.get.hsl('hsl(41, 50%, 45%)1234'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
 
