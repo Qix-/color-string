@@ -162,9 +162,15 @@ cs.get.hwb = function (string) {
 cs.to.hex = function () {
 	var rgba = swizzle(arguments);
 
-	return rgba.length < 4 || rgba[3] === 1
-		? '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2])
-		: '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + hexDouble(Math.round(rgba[3] * 255));
+	return (
+		'#' +
+		hexDouble(rgba[0]) +
+		hexDouble(rgba[1]) +
+		hexDouble(rgba[2]) +
+		(rgba[3] < 1
+			? (hexDouble(Math.round(rgba[3] * 255)))
+			: '')
+	);
 };
 
 cs.to.rgb = function () {
