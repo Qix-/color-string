@@ -81,6 +81,14 @@ assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
 
 // generators
 assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35, 1]), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35], 1), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35, 1]), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35], 1), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35, 0.3]), '#FF0A234D');
+assert.equal(string.to.hex([255, 10, 35], 0.3), '#FF0A234D');
+assert.equal(string.to.hex([255, 10, 35, 0.3]), '#FF0A234D');
+assert.equal(string.to.hex([255, 10, 35], 0.3), '#FF0A234D');
 
 assert.equal(string.to.rgb([255, 10, 35]), 'rgb(255, 10, 35)');
 assert.equal(string.to.rgb([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');

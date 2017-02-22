@@ -153,8 +153,12 @@ cs.get.hwb = function (string) {
 	return null;
 };
 
-cs.to.hex = function (rgb) {
-	return '#' + hexDouble(rgb[0]) + hexDouble(rgb[1]) + hexDouble(rgb[2]);
+cs.to.hex = function () {
+	var rgba = swizzle(arguments);
+
+	return rgba.length < 4 || rgba[3] === 1
+		? '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2])
+		: '#' + hexDouble(rgba[0]) + hexDouble(rgba[1]) + hexDouble(rgba[2]) + hexDouble(Math.round(rgba[3] * 255));
 };
 
 cs.to.rgb = function () {
