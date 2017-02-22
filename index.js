@@ -46,8 +46,8 @@ cs.get.rgb = function (string) {
 		return null;
 	}
 
-	var abbr = /^#([a-fA-F0-9]{3})$/;
-	var hex = /^#([a-fA-F0-9]{6})$/;
+	var abbr = /^#([a-f0-9]{3,4})$/i;
+	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
 	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var keyword = /(\D+)/;
@@ -55,20 +55,31 @@ cs.get.rgb = function (string) {
 	var rgb = [0, 0, 0, 1];
 	var match;
 	var i;
+	var hexAlpha;
 
 	if (match = string.match(abbr)) {
 		match = match[1];
+		hexAlpha = match[3];
 
 		for (i = 0; i < 3; i++) {
 			rgb[i] = parseInt(match[i] + match[i], 16);
 		}
+
+		if (hexAlpha) {
+			rgb[3] = Math.round(parseInt(hexAlpha + hexAlpha, 16) / 255);
+		}
 	} else if (match = string.match(hex)) {
+		hexAlpha = match[2];
 		match = match[1];
 
 		for (i = 0; i < 3; i++) {
 			// https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19
 			var i2 = i * 2;
 			rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
+		}
+
+		if (hexAlpha) {
+			rgb[3] = Math.round((parseInt(hexAlpha, 16) / 255) * 100) / 100;
 		}
 	} else if (match = string.match(rgba)) {
 		for (i = 0; i < 3; i++) {
@@ -153,8 +164,18 @@ cs.get.hwb = function (string) {
 	return null;
 };
 
-cs.to.hex = function (rgb) {
-	return '#' + hexDouble(rgb[0]) + hexDouble(rgb[1]) + hexDouble(rgb[2]);
+cs.to.hex = function () {
+	var rgba = swizzle(arguments);
+
+	return (
+		'#' +
+		hexDouble(rgba[0]) +
+		hexDouble(rgba[1]) +
+		hexDouble(rgba[2]) +
+		(rgba[3] < 1
+			? (hexDouble(Math.round(rgba[3] * 255)))
+			: '')
+	);
 };
 
 cs.to.rgb = function () {

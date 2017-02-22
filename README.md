@@ -18,6 +18,8 @@ $ npm install color-string
 
 ```js
 colorString.get('#FFF')                          // {model: 'rgb', value: [255, 255, 255, 1]}
+colorString.get('#FFFA')                         // {model: 'rgb', value: [255, 255, 255, 0.67]}
+colorString.get('#FFFFFFAA')                     // {model: 'rgb', value: [255, 255, 255, 0.67]}
 colorString.get('hsl(360, 100%, 50%)')           // {model: 'hsl', value: [0, 100, 50, 1]}
 colorString.get('hwb(60, 3%, 60%)')              // {model: 'hwb', value: [60, 3, 60, 1]}
 
@@ -39,6 +41,8 @@ colorString.get.rgb('invalid color string')      // null
 
 ```js
 colorString.to.hex([255, 255, 255])     // "#FFFFFF"
+colorString.to.hex([0, 0, 255, 0.4])    // "#0000FF66"
+colorString.to.hex([0, 0, 255], 0.4)    // "#0000FF66"
 colorString.to.rgb([255, 255, 255])     // "rgb(255, 255, 255)"
 colorString.to.rgb([0, 0, 255, 0.4])    // "rgba(0, 0, 255, 0.4)"
 colorString.to.rgb([0, 0, 255], 0.4)    // "rgba(0, 0, 255, 0.4)"

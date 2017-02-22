@@ -14,6 +14,9 @@ assert.deepEqual(string.get.hwb('hwb(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]
 // generic .get()
 assert.deepEqual(string.get('#fef'), {model: 'rgb', value: [255, 238, 255, 1]});
 assert.deepEqual(string.get('#fffFEF'), {model: 'rgb', value: [255, 255, 239, 1]});
+assert.deepEqual(string.get('#fffFEFff'), {model: 'rgb', value: [255, 255, 239, 1]});
+assert.deepEqual(string.get('#fffFEF00'), {model: 'rgb', value: [255, 255, 239, 0]});
+assert.deepEqual(string.get('#fffFEFa9'), {model: 'rgb', value: [255, 255, 239, 0.66]});
 assert.deepEqual(string.get('rgb(244, 233, 100)'), {model: 'rgb', value: [244, 233, 100, 1]});
 assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
@@ -26,6 +29,11 @@ assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [
 assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('333333'), null);
+assert.strictEqual(string.get('#1'), null);
+assert.strictEqual(string.get('#f'), null);
+assert.strictEqual(string.get('#4f'), null);
+assert.strictEqual(string.get('#45ab4'), null);
+assert.strictEqual(string.get('#45ab45e'), null);
 
 // with sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
@@ -47,6 +55,9 @@ assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 
 // alpha
+assert.deepEqual(string.get.rgb('#c814e933'), [200, 20, 233, 0.2]);
+assert.deepEqual(string.get.rgb('#c814e900'), [200, 20, 233, 0]);
+assert.deepEqual(string.get.rgb('#c814e9ff'), [200, 20, 233, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0.2)'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(100%, 30%, 90%, 0.2)'), [255, 77, 229, 0.2]);
@@ -76,11 +87,22 @@ assert.strictEqual(string.get.rgb('333333'), null);
 assert.strictEqual(string.get.rgb('1'), null);
 assert.strictEqual(string.get.rgb('1892371923879'), null);
 assert.strictEqual(string.get.rgb('444'), null);
+assert.strictEqual(string.get.rgb('#1'), null);
+assert.strictEqual(string.get.rgb('#f'), null);
+assert.strictEqual(string.get.rgb('#4f'), null);
+assert.strictEqual(string.get.rgb('#45ab4'), null);
+assert.strictEqual(string.get.rgb('#45ab45e'), null);
 assert.strictEqual(string.get.hsl('hsl(41, 50%, 45%)1234'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
 
 // generators
 assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35, 1]), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35], 1), '#FF0A23');
+assert.equal(string.to.hex([255, 10, 35, 0.3]), '#FF0A234D');
+assert.equal(string.to.hex([255, 10, 35], 0.3), '#FF0A234D');
+assert.equal(string.to.hex([255, 10, 35, 0]), '#FF0A2300');
+assert.equal(string.to.hex([255, 10, 35], 0), '#FF0A2300');
 
 assert.equal(string.to.rgb([255, 10, 35]), 'rgb(255, 10, 35)');
 assert.equal(string.to.rgb([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
