@@ -46,8 +46,8 @@ cs.get.rgb = function (string) {
 		return null;
 	}
 
-	var abbr = /^#([a-fA-F0-9]{3,4})$/;
-	var hex = /^#([a-fA-F0-9]{6,8})$/;
+	var abbr = /^#([a-f0-9]{3})([a-f0-9])?$/i;
+	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
 	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var keyword = /(\D+)/;
@@ -55,17 +55,20 @@ cs.get.rgb = function (string) {
 	var rgb = [0, 0, 0, 1];
 	var match;
 	var i;
+	var hexAlpha;
 
 	if (match = string.match(abbr)) {
+		hexAlpha = match[2];
 		match = match[1];
 
 		for (i = 0; i < 3; i++) {
 			rgb[i] = parseInt(match[i] + match[i], 16);
 		}
-		if (match[3]) {
-			rgb[3] = Math.round(parseInt(match[3] + match[3], 16) / 255);
+		if (hexAlpha) {
+			rgb[3] = Math.round(parseInt(hexAlpha + hexAlpha, 16) / 255);
 		}
 	} else if (match = string.match(hex)) {
+		hexAlpha = match[2];
 		match = match[1];
 
 		for (i = 0; i < 3; i++) {
@@ -73,8 +76,8 @@ cs.get.rgb = function (string) {
 			var i2 = i * 2;
 			rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
 		}
-		if (match[6] && match[7]) {
-			rgb[3] = Math.round((parseInt(match.slice(6, 6 + 2), 16) / 255) * 100) / 100;
+		if (hexAlpha) {
+			rgb[3] = Math.round((parseInt(hexAlpha, 16) / 255) * 100) / 100;
 		}
 	} else if (match = string.match(rgba)) {
 		for (i = 0; i < 3; i++) {
