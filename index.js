@@ -46,8 +46,8 @@ cs.get.rgb = function (string) {
 		return null;
 	}
 
-	var abbr = /^#([a-fA-F0-9]{3})$/;
-	var hex = /^#([a-fA-F0-9]{6})$/;
+	var abbr = /^#([a-fA-F0-9]{3,4})$/;
+	var hex = /^#([a-fA-F0-9]{6,8})$/;
 	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var keyword = /(\D+)/;
@@ -62,6 +62,9 @@ cs.get.rgb = function (string) {
 		for (i = 0; i < 3; i++) {
 			rgb[i] = parseInt(match[i] + match[i], 16);
 		}
+		if (match[3]) {
+			rgb[3] = Math.round(parseInt(match[3] + match[3], 16) / 255);
+		}
 	} else if (match = string.match(hex)) {
 		match = match[1];
 
@@ -69,6 +72,9 @@ cs.get.rgb = function (string) {
 			// https://jsperf.com/slice-vs-substr-vs-substring-methods-long-string/19
 			var i2 = i * 2;
 			rgb[i] = parseInt(match.slice(i2, i2 + 2), 16);
+		}
+		if (match[6] && match[7]) {
+			rgb[3] = Math.round((parseInt(match.slice(6, 6 + 2), 16) / 255) * 100) / 100;
 		}
 	} else if (match = string.match(rgba)) {
 		for (i = 0; i < 3; i++) {
