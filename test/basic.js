@@ -55,6 +55,7 @@ assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 
 // alpha
+assert.deepEqual(string.get.rgb('#fffa'), [255, 255, 255, 0.67]);
 assert.deepEqual(string.get.rgb('#c814e933'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('#c814e900'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('#c814e9ff'), [200, 20, 233, 1]);
