@@ -46,7 +46,7 @@ cs.get.rgb = function (string) {
 		return null;
 	}
 
-	var abbr = /^#([a-f0-9]{3,4})$/i;
+	var abbr = /^#([a-f0-9]{3})([a-f0-9]{1})?$/i;
 	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
 	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
@@ -58,15 +58,15 @@ cs.get.rgb = function (string) {
 	var hexAlpha;
 
 	if (match = string.match(abbr)) {
+		hexAlpha = match[2];
 		match = match[1];
-		hexAlpha = match[3];
 
 		for (i = 0; i < 3; i++) {
 			rgb[i] = parseInt(match[i] + match[i], 16);
 		}
 
 		if (hexAlpha) {
-			rgb[3] = Math.round(parseInt(hexAlpha + hexAlpha, 16) / 255);
+			rgb[3] = Math.round((parseInt(hexAlpha + hexAlpha, 16) / 255) * 100) / 100;
 		}
 	} else if (match = string.match(hex)) {
 		hexAlpha = match[2];
