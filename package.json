@@ -15,8 +15,9 @@
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js", "index.d.ts"
   ],
+  "types": "./index.d.ts",
   "xo": {
     "rules": {
       "no-cond-assign": 0,
