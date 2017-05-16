@@ -17,6 +17,7 @@
   "files": [
     "index.js"
   ],
+  "types": "./index.d.ts",
   "xo": {
     "rules": {
       "no-cond-assign": 0,
