@@ -11,11 +11,13 @@
   "repository": "Qix-/color-string",
   "scripts": {
     "pretest": "xo",
-    "test": "node test/basic.js"
+    "test": "node test/basic.js",
+    "prepublish": "rollup --config"
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "umd.js"
   ],
   "xo": {
     "rules": {
@@ -28,6 +30,9 @@
     "simple-swizzle": "^0.2.2"
   },
   "devDependencies": {
+    "rollup": "^0.66.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
     "xo": "^0.12.1"
   },
   "keywords": [
@@ -35,5 +40,6 @@
     "colour",
     "rgb",
     "css"
-  ]
+  ],
+  "unpkg": "umd.js"
 }
