@@ -39,7 +39,6 @@ assert.strictEqual(string.get('#45ab45e'), null);
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
-assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.hsl('hsla(+200, 100%, 50%, -0.2)'), [200, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsla(-10.0, 100%, 50%, -0.2)'), [350, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsla(.5, 100%, 50%, -0.2)'), [0.5, 100, 50, 0]);
@@ -49,6 +48,13 @@ assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +0.6)'), [120, 100, 5
 assert.deepEqual(string.get.hwb('hwb(10.0deg, 100%, 50.5%)'), [10, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-.5, 100%, 50.5%)'), [359.5, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-10.0deg, 100%, 50.5%, +0.6)'), [350, 100, 50.5, 0.6]);
+
+// case insensitive
+assert.deepEqual(string.get.rgb('RGB(-244, +233, -100)'), [0, 233, 0, 1]);
+assert.deepEqual(string.get.hsl('HSL(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
+assert.deepEqual(string.get.rgb('RGBA(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
+assert.deepEqual(string.get.hsl('HSLA(.5, 100%, 50%, -0.2)'), [0.5, 100, 50, 0]);
+assert.deepEqual(string.get.hwb('HWB(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 
 // subsequent return values should not change array
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
