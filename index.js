@@ -1,12 +1,13 @@
 /* MIT license */
 var colorNames = require('color-name');
 var swizzle = require('simple-swizzle');
+var hasOwnProperty = Object.hasOwnProperty;
 
 var reverseNames = {};
 
 // create a list of reverse color names
 for (var name in colorNames) {
-	if (colorNames.hasOwnProperty(name)) {
+	if (hasOwnProperty.call(colorNames, name)) {
 		reverseNames[colorNames[name]] = name;
 	}
 }
@@ -111,12 +112,11 @@ cs.get.rgb = function (string) {
 			return [0, 0, 0, 0];
 		}
 
-		rgb = colorNames[match[1]];
-
-		if (!rgb) {
+		if (!hasOwnProperty.call(colorNames, match[1])) {
 			return null;
 		}
 
+		rgb = colorNames[match[1]];
 		rgb[3] = 1;
 
 		return rgb;
