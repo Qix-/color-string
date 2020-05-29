@@ -17,6 +17,7 @@ var cs = module.exports = {
 };
 
 cs.get = function (string) {
+	string = checkAndTrimString(string);
 	var prefix = string.substring(0, 3).toLowerCase();
 	var val;
 	var model;
@@ -46,6 +47,7 @@ cs.get.rgb = function (string) {
 	if (!string) {
 		return null;
 	}
+	string = checkAndTrimString(string);
 
 	var abbr = /^#([a-f0-9]{3,4})$/i;
 	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
@@ -125,6 +127,7 @@ cs.get.rgb = function (string) {
 };
 
 cs.get.hsl = function (string) {
+	string = checkAndTrimString(string);
 	if (!string) {
 		return null;
 	}
@@ -146,6 +149,7 @@ cs.get.hsl = function (string) {
 };
 
 cs.get.hwb = function (string) {
+	string = checkAndTrimString(string);
 	if (!string) {
 		return null;
 	}
@@ -231,4 +235,11 @@ function clamp(num, min, max) {
 function hexDouble(num) {
 	var str = num.toString(16).toUpperCase();
 	return (str.length < 2) ? '0' + str : str;
+}
+
+function checkAndTrimString(string) {
+	if (string && string.trim && string.trim instanceof Function) {
+		string = string.trim();
+	}
+	return string;
 }
