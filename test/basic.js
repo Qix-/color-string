@@ -36,6 +36,7 @@ assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 
 assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
 assert.deepEqual(string.get('hsl(240, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
+assert.deepEqual(string.get('hsl(-480, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(240 100% 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(240deg, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(240deg 100% 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
