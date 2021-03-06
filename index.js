@@ -51,7 +51,7 @@ cs.get.rgb = function (string) {
 	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
 	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
 	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*,\s*([+-]?[\d\.]+)\%\s*(?:,\s*([+-]?[\d\.]+)\s*)?\)$/;
-	var keyword = /(\D+)/;
+	var keyword = /(\w+)/;
 
 	var rgb = [0, 0, 0, 1];
 	var match;
