@@ -25,7 +25,9 @@ colorString.get('hwb(60, 3%, 60%)')              // {model: 'hwb', value: [60, 3
 colorString.get.rgb('#FFF')                      // [255, 255, 255, 1]
 colorString.get.rgb('blue')                      // [0, 0, 255, 1]
 colorString.get.rgb('rgba(200, 60, 60, 0.3)')    // [200, 60, 60, 0.3]
+colorString.get.rgb('rgba(200 60 60 / 0.3)')     // [200, 60, 60, 0.3]
 colorString.get.rgb('rgb(200, 200, 200)')        // [200, 200, 200, 1]
+colorString.get.rgb('rgb(200 200 200)')          // [200, 200, 200, 1]
 
 colorString.get.hsl('hsl(360, 100%, 50%)')       // [0, 100, 50, 1]
 colorString.get.hsl('hsl(360 100% 50%)')         // [0, 100, 50, 1]
