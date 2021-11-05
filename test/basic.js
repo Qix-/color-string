@@ -86,7 +86,7 @@ assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 
 // no alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
-assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0.2)'), [200, 20, 233, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(200, 20, 233)'), [200, 20, 233, 1]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.rgb('rgba(0, 0, 0, 0)'), [0, 0, 0, 0]);
