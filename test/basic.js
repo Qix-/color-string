@@ -13,7 +13,9 @@ function normalizeAlpha(res) {
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
 assert.deepEqual(string.get.rgb('#fffFEF'), [255, 255, 239, 1]);
 assert.deepEqual(string.get.rgb('rgb(244, 233, 100)'), [244, 233, 100, 1]);
+assert.deepEqual(string.get.rgb('rgb(244 233 100)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 229, 1]);
+assert.deepEqual(string.get.rgb('rgb(100% 30% 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('transparent'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240 100% 50.5%)'), [240, 100, 50.5, 1]);
@@ -29,7 +31,9 @@ assert.deepEqual(string.get('#fffFEFff'), {model: 'rgb', value: [255, 255, 239, 
 assert.deepEqual(string.get('#fffFEF00'), {model: 'rgb', value: [255, 255, 239, 0]});
 assert.deepEqual(normalizeAlpha(string.get('#fffFEFa9')), {model: 'rgb', value: [255, 255, 239, '0.66']});
 assert.deepEqual(string.get('rgb(244, 233, 100)'), {model: 'rgb', value: [244, 233, 100, 1]});
+assert.deepEqual(string.get('rgb(244 233 100)'), {model: 'rgb', value: [244, 233, 100, 1]});
 assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
+assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
 assert.deepEqual(string.get('hsl(240, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(240 100% 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
@@ -42,6 +46,7 @@ assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [
 assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('hsl(250 100% 50% / 50%)'), null);
 assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
+assert.deepEqual(string.get('rgba(250 100% 50% / 50%)'), null);
 assert.deepEqual(string.get('333333'), null);
 assert.strictEqual(string.get('#1'), null);
 assert.strictEqual(string.get('#f'), null);
@@ -51,10 +56,13 @@ assert.strictEqual(string.get('#45ab45e'), null);
 
 // with sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
+assert.deepEqual(string.get.rgb('rgb(-244 +233 -100)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
+assert.deepEqual(string.get.rgb('rgba(200 +20 -233 / -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
+assert.deepEqual(string.get.rgb('rgba(200 +20 -233 / -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.hsl('hsla(+200, 100%, 50%, -0.2)'), [200, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / -0.2)'), [200, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsla(-10.0, 100%, 50%, -0.2)'), [350, 100, 50, 0]);
@@ -78,8 +86,11 @@ assert.deepEqual(string.get.rgb('#c814e933'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('#c814e900'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('#c814e9ff'), [200, 20, 233, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0.2)'), [200, 20, 233, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0.2)'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0)'), [200, 20, 233, 0]);
+assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(100%, 30%, 90%, 0.2)'), [255, 77, 229, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 0.2)'), [255, 77, 229, 0.2]);
 assert.deepEqual(string.get.hsl('hsla(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
@@ -87,9 +98,11 @@ assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 // no alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233)'), [200, 20, 233, 1]);
+assert.deepEqual(string.get.rgb('rgba(200 20 233)'), [200, 20, 233, 1]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.rgb('rgba(0, 0, 0, 0)'), [0, 0, 0, 0]);
+assert.deepEqual(string.get.rgb('rgba(0 0 0 / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsla(0, 0%, 0%, 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0deg 0% 0% / 0)'), [0, 0, 0, 0]);
@@ -97,7 +110,9 @@ assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 0)'), [40, 10, 100, 0]);
 
 // range
 assert.deepEqual(string.get.rgb('rgba(300, 600, 100, 3)'), [255, 255, 100, 1]);
+assert.deepEqual(string.get.rgb('rgba(300 600 100 / 3)'), [255, 255, 100, 1]);
 assert.deepEqual(string.get.rgb('rgba(8000%, 100%, 333%, 88)'), [255, 255, 255, 1]);
+assert.deepEqual(string.get.rgb('rgba(8000% 100% 333% / 88)'), [255, 255, 255, 1]);
 assert.deepEqual(string.get.hsl('hsla(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hsl('hsl(400 10% 200% / 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
@@ -108,6 +123,7 @@ assert.strictEqual(string.get.rgb('hsl(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('hsl(100 10% 10%)'), null);
 assert.strictEqual(string.get.rgb('hwb(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('rgb(123, 255, 9)1234'), null);
+assert.strictEqual(string.get.rgb('rgb(123 255 9)1234'), null);
 assert.strictEqual(string.get.rgb('333333'), null);
 assert.strictEqual(string.get.rgb('1'), null);
 assert.strictEqual(string.get.rgb('1892371923879'), null);
