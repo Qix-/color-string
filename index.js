@@ -49,8 +49,8 @@ cs.get.rgb = function (string) {
 
 	var abbr = /^#([a-f0-9]{3,4})$/i;
 	var hex = /^#([a-f0-9]{6})([a-f0-9]{2})?$/i;
-	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,?\s*([+-]?\d+)\s*,?\s*([+-]?\d+)\s*(?:[,|\/]\s*([+-]?[\d\.]+)\s*)?\)$/;
-	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*(?:[,|\/]\s*([+-]?[\d\.]+)\s*)?\)$/;
+	var rgba = /^rgba?\(\s*([+-]?\d+)\s*,?\s*([+-]?\d+)\s*,?\s*([+-]?\d+)\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
+	var per = /^rgba?\(\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*,?\s*([+-]?[\d\.]+)\%\s*(?:[,|\/]\s*([+-]?[\d\.]+)(%?)\s*)?\)$/;
 	var keyword = /(\D+)/;
 
 	var rgb = [0, 0, 0, 1];
@@ -88,7 +88,11 @@ cs.get.rgb = function (string) {
 		}
 
 		if (match[4]) {
-			rgb[3] = parseFloat(match[4]);
+			if (match[5]) {
+				rgb[3] = parseInt(match[4], 0) * 0.01;
+			} else {
+				rgb[3] = parseFloat(match[4]);
+			}
 		}
 	} else if (match = string.match(per)) {
 		for (i = 0; i < 3; i++) {
@@ -96,7 +100,11 @@ cs.get.rgb = function (string) {
 		}
 
 		if (match[4]) {
-			rgb[3] = parseFloat(match[4]);
+			if (match[5]) {
+				rgb[3] = parseInt(match[4], 0) * 0.01;
+			} else {
+				rgb[3] = parseFloat(match[4]);
+			}
 		}
 	} else if (match = string.match(keyword)) {
 		if (match[1] === 'transparent') {
