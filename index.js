@@ -90,7 +90,7 @@ cs.get.rgb = function (string) {
 
 		if (match[4]) {
 			if (match[5]) {
-				rgb[3] = parseInt(match[4], 0) * 0.01;
+				rgb[3] = parseFloat(match[4]) * 0.01;
 			} else {
 				rgb[3] = parseFloat(match[4]);
 			}
@@ -102,7 +102,7 @@ cs.get.rgb = function (string) {
 
 		if (match[4]) {
 			if (match[5]) {
-				rgb[3] = parseInt(match[4], 0) * 0.01;
+				rgb[3] = parseFloat(match[4]) * 0.01;
 			} else {
 				rgb[3] = parseFloat(match[4]);
 			}
