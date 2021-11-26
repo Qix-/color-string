@@ -57,7 +57,10 @@ cs.get.rgb = function (string) {
 	var rgb = [0, 0, 0, 1];
 	var match;
 	var i;
+	// Correction factor for alpha percentage (https://stackoverflow.com/a/18908122/1889685)
+	var cf = 100;
 	var hexAlpha;
+	var rgbAlphaPercentage;
 
 	if (match = string.match(hex)) {
 		hexAlpha = match[2];
@@ -90,7 +93,8 @@ cs.get.rgb = function (string) {
 
 		if (match[4]) {
 			if (match[5]) {
-				rgb[3] = parseInt(match[4], 0) * 0.01;
+				rgbAlphaPercentage = (parseFloat(match[4]) * cf) * (0.01 * cf) / (cf * cf);
+				rgb[3] = clamp(isNaN(rgbAlphaPercentage) ? 1 : rgbAlphaPercentage, 0, 1);
 			} else {
 				rgb[3] = parseFloat(match[4]);
 			}
@@ -102,7 +106,8 @@ cs.get.rgb = function (string) {
 
 		if (match[4]) {
 			if (match[5]) {
-				rgb[3] = parseInt(match[4], 0) * 0.01;
+				rgbAlphaPercentage = (parseFloat(match[4]) * cf) * (0.01 * cf) / (cf * cf);
+				rgb[3] = clamp(isNaN(rgbAlphaPercentage) ? 1 : rgbAlphaPercentage, 0, 1);
 			} else {
 				rgb[3] = parseFloat(match[4]);
 			}
