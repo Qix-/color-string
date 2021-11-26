@@ -237,6 +237,6 @@ function clamp(num, min, max) {
 }
 
 function hexDouble(num) {
-	var str = num.toString(16).toUpperCase();
+	var str = Math.round(num).toString(16).toUpperCase();
 	return (str.length < 2) ? '0' + str : str;
 }
