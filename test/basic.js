@@ -88,6 +88,7 @@ assert.deepEqual(string.get.rgb('#c814e9ff'), [200, 20, 233, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0.2)'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0.2)'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 / 20%)'), [200, 20, 233, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(200 20 233 / 20.2%)'), [200, 20, 233, 0.202]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233, 0)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0%)'), [200, 20, 233, 0]);
