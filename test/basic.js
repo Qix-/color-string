@@ -53,6 +53,16 @@ assert.strictEqual(string.get('#f'), null);
 assert.strictEqual(string.get('#4f'), null);
 assert.strictEqual(string.get('#45ab4'), null);
 assert.strictEqual(string.get('#45ab45e'), null);
+assert.strictEqual(string.get('rgb()'), null);
+assert.strictEqual(string.get('rgb(10)'), null);
+assert.strictEqual(string.get('rgb(10,  2)'), null);
+assert.strictEqual(string.get('rgb(10,  2, 2348723dskjfs)'), null);
+assert.strictEqual(string.get('rgb(10%)'), null);
+assert.strictEqual(string.get('rgb(10%,  2%)'), null);
+assert.strictEqual(string.get('rgb(10%,  2%, 2348723%dskjfs)'), null);
+assert.strictEqual(string.get('rgb(10%,  2%, 2348723dskjfs%)'), null);
+assert.strictEqual(string.get('rgb(10$,3)'), null);
+assert.strictEqual(string.get('rgba(10,  3)'), null);
 
 // with sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
