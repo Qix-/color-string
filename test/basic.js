@@ -87,6 +87,9 @@ assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%)'), [120, 100, 50.5, 1
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +0.6)'), [120, 100, 50.5, 0.6]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e-7)'), [120, 100, 50.5, 1e-7]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e7)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, 127.88e4)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, 0.2e3)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, .1e-4)'), [120, 100, 50.5, 1e-5]);
 assert.deepEqual(string.get.hwb('hwb(10.0deg, 100%, 50.5%)'), [10, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-.5, 100%, 50.5%)'), [359.5, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-10.0deg, 100%, 50.5%, +0.6)'), [350, 100, 50.5, 0.6]);
