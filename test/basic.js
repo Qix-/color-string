@@ -157,6 +157,11 @@ assert.strictEqual(string.get.rgb('#45ab45e'), null);
 assert.strictEqual(string.get.hsl('hsl(41, 50%, 45%)1234'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45%)1234'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 3)1234'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 1e)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / e)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 0e-)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 0e+)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / +000e33)'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
 
 // generators
