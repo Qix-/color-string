@@ -171,7 +171,11 @@ assert.strictEqual(string.get.hsl('hsl(41 50% 45% / e)'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 0e-)'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 0e+)'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45% / +000e33)'), null);
-assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 1e)1234'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, e)1234'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e-)1234'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e+)1234'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, +000e33)1234'), null);
 
 // generators
 assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
