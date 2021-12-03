@@ -74,7 +74,14 @@ assert.deepEqual(string.get.rgb('rgba(200 +20 -233 / -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 +20 -233 / -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.hsl('hsla(+200, 100%, 50%, -0.2)'), [200, 100, 50, 0]);
+assert.deepEqual(string.get.hsl('hsla(+200, 100%, 50%, -1e-7)'), [200, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / -0.2)'), [200, 100, 50, 0]);
+assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / -1e-7)'), [200, 100, 50, 0]);
+assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / -2.e7)'), [200, 100, 50, 0]);
+assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / +1e7)'), [200, 100, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / 127.88e4)'), [200, 100, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / 0.2e3)'), [200, 100, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / .1e-4)'), [200, 100, 50, 1e-5]);
 assert.deepEqual(string.get.hsl('hsla(-10.0, 100%, 50%, -0.2)'), [350, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsl(-10.0 100% 50% / -0.2)'), [350, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsla(.5, 100%, 50%, -0.2)'), [0.5, 100, 50, 0]);
@@ -82,6 +89,13 @@ assert.deepEqual(string.get.hsl('hsl(.5 100% 50% / -0.2)'), [0.5, 100, 50, 0]);
 assert.deepEqual(string.get.hwb('hwb(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%)'), [120, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +0.6)'), [120, 100, 50.5, 0.6]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e-7)'), [120, 100, 50.5, 1e-7]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, -2.e7)'), [120, 100, 50.5, 0]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e7)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e7)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, 127.88e4)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, 0.2e3)'), [120, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, .1e-4)'), [120, 100, 50.5, 1e-5]);
 assert.deepEqual(string.get.hwb('hwb(10.0deg, 100%, 50.5%)'), [10, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-.5, 100%, 50.5%)'), [359.5, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-10.0deg, 100%, 50.5%, +0.6)'), [350, 100, 50.5, 0.6]);
@@ -105,8 +119,11 @@ assert.deepEqual(string.get.rgb('rgba(100%, 30%, 90%, 0.2)'), [255, 77, 229, 0.2
 assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 0.2)'), [255, 77, 229, 0.2]);
 assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 20%)'), [255, 77, 229, 0.2]);
 assert.deepEqual(string.get.hsl('hsla(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
+assert.deepEqual(string.get.hsl('hsla(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);
+assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 1e-7)'), [200, 20, 33, 1e-7]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
+assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
 
 // no alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
@@ -149,7 +166,16 @@ assert.strictEqual(string.get.rgb('#45ab45e'), null);
 assert.strictEqual(string.get.hsl('hsl(41, 50%, 45%)1234'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45%)1234'), null);
 assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 3)1234'), null);
-assert.strictEqual(string.get.hwb('hwb(240, 100%, 50.5%)1234'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 1e)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / e)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 0e-)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / 0e+)'), null);
+assert.strictEqual(string.get.hsl('hsl(41 50% 45% / +000e33)'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 1e'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, e'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e-'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e+'), null);
+assert.strictEqual(string.get.hwb('hwb(240, 100%, +000e33'), null);
 
 // generators
 assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
