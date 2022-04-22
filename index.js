@@ -3,7 +3,7 @@ var colorNames = require('color-name');
 var swizzle = require('simple-swizzle');
 var hasOwnProperty = Object.hasOwnProperty;
 
-var reverseNames = {};
+var reverseNames = Object.create(null);
 
 // create a list of reverse color names
 for (var name in colorNames) {

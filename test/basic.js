@@ -216,6 +216,7 @@ assert.equal(string.to.hwb([280, 40, 60], 0.3), 'hwb(280, 40%, 60%, 0.3)');
 assert.equal(string.to.hwb([280, 40, 60], 0), 'hwb(280, 40%, 60%, 0)');
 
 assert.equal(string.to.keyword([255, 255, 0]), 'yellow');
+assert.equal(string.to.keyword(['constructor']), undefined);
 assert.equal(string.to.keyword([100, 255, 0]), undefined);
 
 // Make sure .get() doesn't return object prototype values (regression test, #44)
