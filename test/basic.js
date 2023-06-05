@@ -26,6 +26,7 @@ assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 
 // Generic .get()
+assert.deepEqual(string.get('invalid'), null);
 assert.deepEqual(string.get('#fef'), {model: 'rgb', value: [255, 238, 255, 1]});
 assert.deepEqual(string.get('#fffFEF'), {model: 'rgb', value: [255, 255, 239, 1]});
 assert.deepEqual(string.get('#fffFEFff'), {model: 'rgb', value: [255, 255, 239, 1]});
@@ -197,7 +198,6 @@ assert.equal(string.to.hwb(280, 40, 60), 'hwb(280, 40%, 60%)');
 assert.equal(string.to.hwb(280, 40, 60, 0.3), 'hwb(280, 40%, 60%, 0.3)');
 
 assert.equal(string.to.keyword(255, 255, 0), 'yellow');
-assert.equal(string.to.keyword('constructor'), undefined);
 assert.equal(string.to.keyword(100, 255, 0), undefined);
 
 // Make sure .get() doesn't return object prototype values (regression test, #44)

@@ -1,18 +1,23 @@
 export type Model = 'rgb' | 'hsl' | 'hwb';
 
-export type Value = number[] | undefined;
-
-export type Get = {
-	(color: string): {model: Model; value: Value};
-	rgb: (color: string) => Value;
-	hsl: (color: string) => Value;
-	hwb: (color: string) => Value;
+export type ColorString = {
+	get: {
+		(color: string): {model: Model; value: number[]} | undefined;
+		rgb: (color: string) => number[] | undefined;
+		hsl: (color: string) => number[] | undefined;
+		hwb: (color: string) => number[] | undefined;
+	};
+	to: {
+		hex: (r: number, g: number, b: number, a?: number) => string | undefined;
+		rgb: {
+			(r: number, g: number, b: number, a?: number): string | undefined;
+			percent: (r: number, g: number, b: number, a?: number) => string | undefined;
+		};
+		keyword: (r: number, g: number, b: number, a?: number) => string | undefined;
+		hsl: (h: number, s: number, l: number, a?: number) => string | undefined;
+		hwb: (h: number, w: number, b: number, a?: number) => string | undefined;
+	};
 };
 
-export type To = {
-	hex: (color: string) => string;
-	rgb: (color: string) => string;
-	keyword: (color: string) => string;
-	hsl: (color: string) => string;
-	hwb: (color: string) => string;
-};
+declare const colorString: ColorString;
+export default colorString;

@@ -11,12 +11,14 @@
   "repository": "Qix-/color-string",
   "type": "module",
   "exports": "./index.js",
+  "types": "./index.d.ts",
   "scripts": {
-    "test": "xo && node test/basic.js"
+    "test": "xo && tsd && node test/basic.js"
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "xo": {
     "rules": {
