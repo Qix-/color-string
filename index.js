@@ -1,12 +1,10 @@
 import colorNames from 'color-name';
 
-const hasOwnProperty = Object.hasOwnProperty;
-
 const reverseNames = Object.create(null);
 
 // Create a list of reverse color names
 for (const name in colorNames) {
-	if (hasOwnProperty.call(colorNames, name)) {
+	if (Object.hasOwnProperty.call(colorNames, name)) {
 		reverseNames[colorNames[name]] = name;
 	}
 }
@@ -108,7 +106,7 @@ cs.get.rgb = function (string) {
 			return [0, 0, 0, 0];
 		}
 
-		if (!hasOwnProperty.call(colorNames, match[1])) {
+		if (!Object.hasOwnProperty.call(colorNames, match[1])) {
 			return null;
 		}
 
