@@ -12,6 +12,9 @@
   "type": "module",
   "exports": "./index.js",
   "types": "./index.d.ts",
+  "engines": {
+    "node": ">=14.6"
+  },
   "scripts": {
     "test": "xo && tsd && node test/basic.js"
   },
