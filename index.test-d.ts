@@ -1,6 +1,5 @@
 import {expectType} from 'tsd';
-import colorString from './index.js';
-import type {Model} from './index.js';
+import colorString, {type Model} from './index.js';
 
 type GetColorResult = {model: Model; value: number[]} | undefined;
 type GetSpecificTypeResult = number[] | undefined;

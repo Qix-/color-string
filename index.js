@@ -4,7 +4,7 @@ const reverseNames = Object.create(null);
 
 // Create a list of reverse color names
 for (const name in colorNames) {
-	if (Object.hasOwnProperty.call(colorNames, name)) {
+	if (Object.hasOwn(colorNames, name)) {
 		reverseNames[colorNames[name]] = name;
 	}
 }
@@ -106,7 +106,7 @@ cs.get.rgb = function (string) {
 			return [0, 0, 0, 0];
 		}
 
-		if (!Object.hasOwnProperty.call(colorNames, match[1])) {
+		if (!Object.hasOwn(colorNames, match[1])) {
 			return null;
 		}
 
