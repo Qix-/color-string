@@ -16,7 +16,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "test": "xo && tsd && node test/basic.js"
+    "test": "xo && tsd && node test.js"
   },
   "license": "MIT",
   "files": [

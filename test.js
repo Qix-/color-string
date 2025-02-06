@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import string from '../index.js';
+import string from './index.js';
 
 function normalizeAlpha(result) {
 	if (result.model === 'rgb' && result.value.length >= 4) {
