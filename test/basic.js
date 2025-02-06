@@ -1,13 +1,14 @@
-var assert = require('assert');
-var string = require('../');
+import assert from 'node:assert';
+import string from '../index.js';
 
-function normalizeAlpha(res) {
-	if (res.model === 'rgb' && res.value.length >= 4) {
-		res.value[3] = res.value[3].toFixed(2);
-	} else if (res.length >= 4) {
-		res[3] = res[3].toFixed(2);
+function normalizeAlpha(result) {
+	if (result.model === 'rgb' && result.value.length >= 4) {
+		result.value[3] = result.value[3].toFixed(2);
+	} else if (result.length >= 4) {
+		result[3] = result[3].toFixed(2);
 	}
-	return res;
+
+	return result;
 }
 
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
@@ -24,7 +25,8 @@ assert.deepEqual(string.get.hsl('hsl(240deg 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 
-// generic .get()
+// Generic .get()
+assert.deepEqual(string.get('invalid'), null);
 assert.deepEqual(string.get('#fef'), {model: 'rgb', value: [255, 238, 255, 1]});
 assert.deepEqual(string.get('#fffFEF'), {model: 'rgb', value: [255, 255, 239, 1]});
 assert.deepEqual(string.get('#fffFEFff'), {model: 'rgb', value: [255, 255, 239, 1]});
@@ -43,7 +45,7 @@ assert.deepEqual(string.get('hsl(240deg 100% 50.5%)'), {model: 'hsl', value: [24
 assert.deepEqual(string.get('hwb(240, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 
-// invalid generic .get() calls
+// Invalid generic .get() calls
 assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('hsl(250 100% 50% / 50%)'), null);
 assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
@@ -64,7 +66,7 @@ assert.strictEqual(string.get('rgb(10%,  2%, 2348723dskjfs%)'), null);
 assert.strictEqual(string.get('rgb(10$,3)'), null);
 assert.strictEqual(string.get('rgba(10,  3)'), null);
 
-// with sign
+// With sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.rgb('rgb(-244 +233 -100)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
@@ -100,11 +102,11 @@ assert.deepEqual(string.get.hwb('hwb(10.0deg, 100%, 50.5%)'), [10, 100, 50.5, 1]
 assert.deepEqual(string.get.hwb('hwb(-.5, 100%, 50.5%)'), [359.5, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-10.0deg, 100%, 50.5%, +0.6)'), [350, 100, 50.5, 0.6]);
 
-// subsequent return values should not change array
+// Subsequent return values should not change array
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 
-// alpha
+// Alpha
 assert.deepEqual(normalizeAlpha(string.get.rgb('#fffa')), [255, 255, 255, '0.67']);
 assert.deepEqual(string.get.rgb('#c814e933'), [200, 20, 233, 0.2]);
 assert.deepEqual(string.get.rgb('#c814e900'), [200, 20, 233, 0]);
@@ -125,7 +127,7 @@ assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 1e-7)'), [200, 20, 33, 1e-7])
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
 
-// no alpha
+// No alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, 20, 233)'), [200, 20, 233, 1]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233)'), [200, 20, 233, 1]);
@@ -138,7 +140,7 @@ assert.deepEqual(string.get.hsl('hsl(0 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0deg 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 0)'), [40, 10, 100, 0]);
 
-// range
+// Range
 assert.deepEqual(string.get.rgb('rgba(300, 600, 100, 3)'), [255, 255, 100, 1]);
 assert.deepEqual(string.get.rgb('rgba(300 600 100 / 3)'), [255, 255, 100, 1]);
 assert.deepEqual(string.get.rgb('rgba(8000%, 100%, 333%, 88)'), [255, 255, 255, 1]);
@@ -147,7 +149,7 @@ assert.deepEqual(string.get.hsl('hsla(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hsl('hsl(400 10% 200% / 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
 
-// invalid
+// Invalid
 assert.strictEqual(string.get.rgb('yellowblue'), null);
 assert.strictEqual(string.get.rgb('hsl(100, 10%, 10%)'), null);
 assert.strictEqual(string.get.rgb('hsl(100 10% 10%)'), null);
@@ -177,51 +179,30 @@ assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e-'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e+'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, +000e33'), null);
 
-// generators
-assert.equal(string.to.hex([255, 10, 35]), '#FF0A23');
-assert.equal(string.to.hex([255, 10, 35, 1]), '#FF0A23');
-assert.equal(string.to.hex([255, 10, 35], 1), '#FF0A23');
-assert.equal(string.to.hex([255, 10, 35, 0.3]), '#FF0A234D');
-assert.equal(string.to.hex([255, 10, 35], 0.3), '#FF0A234D');
-assert.equal(string.to.hex([255, 10, 35, 0]), '#FF0A2300');
-assert.equal(string.to.hex([255, 10, 35], 0), '#FF0A2300');
+// Generators
+assert.equal(string.to.hex(255, 10, 35), '#FF0A23');
+assert.equal(string.to.hex(255, 10, 35, 1), '#FF0A23');
 
-assert.equal(string.to.rgb([255, 10, 35]), 'rgb(255, 10, 35)');
-assert.equal(string.to.rgb([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgb([255, 10, 35], 0.3), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgb([255, 10, 35, 0.3]), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgb([255, 10, 35], 0.3), 'rgba(255, 10, 35, 0.3)');
-assert.equal(string.to.rgb([255, 10, 35]), 'rgb(255, 10, 35)');
-assert.equal(string.to.rgb([255, 10, 35, 0]), 'rgba(255, 10, 35, 0)');
+assert.equal(string.to.rgb(255, 10, 35), 'rgb(255, 10, 35)');
+assert.equal(string.to.rgb(255, 10, 35, 0.3), 'rgba(255, 10, 35, 0.3)');
 
-assert.equal(string.to.rgb.percent([255, 10, 35]), 'rgb(100%, 4%, 14%)');
+assert.equal(string.to.rgb.percent(255, 10, 35), 'rgb(100%, 4%, 14%)');
 
-assert.equal(string.to.rgb.percent([255, 10, 35, 0.3]), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgb.percent([255, 10, 35], 0.3), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgb.percent([255, 10, 35, 0.3]), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgb.percent([255, 10, 35], 0.3), 'rgba(100%, 4%, 14%, 0.3)');
-assert.equal(string.to.rgb.percent([255, 10, 35]), 'rgb(100%, 4%, 14%)');
+assert.equal(string.to.rgb.percent(255, 10, 35), 'rgb(100%, 4%, 14%)');
+assert.equal(string.to.rgb.percent(255, 10, 35, 0.3), 'rgba(100%, 4%, 14%, 0.3)');
 
-assert.equal(string.to.hsl([280, 40, 60]), 'hsl(280, 40%, 60%)');
-assert.equal(string.to.hsl([280, 40, 60, 0.3]), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsl([280, 40, 60], 0.3), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsl([280, 40, 60, 0.3]), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsl([280, 40, 60], 0.3), 'hsla(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hsl([280, 40, 60], 0), 'hsla(280, 40%, 60%, 0)');
-assert.equal(string.to.hsl([280, 40, 60]), 'hsl(280, 40%, 60%)');
+assert.equal(string.to.hsl(280, 40, 60), 'hsl(280, 40%, 60%)');
+assert.equal(string.to.hsl(280, 40, 60, 0.3), 'hsla(280, 40%, 60%, 0.3)');
 
-assert.equal(string.to.hwb([280, 40, 60]), 'hwb(280, 40%, 60%)');
-assert.equal(string.to.hwb([280, 40, 60, 0.3]), 'hwb(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hwb([280, 40, 60], 0.3), 'hwb(280, 40%, 60%, 0.3)');
-assert.equal(string.to.hwb([280, 40, 60], 0), 'hwb(280, 40%, 60%, 0)');
+assert.equal(string.to.hwb(280, 40, 60), 'hwb(280, 40%, 60%)');
+assert.equal(string.to.hwb(280, 40, 60, 0.3), 'hwb(280, 40%, 60%, 0.3)');
 
-assert.equal(string.to.keyword([255, 255, 0]), 'yellow');
-assert.equal(string.to.keyword(['constructor']), undefined);
-assert.equal(string.to.keyword([100, 255, 0]), undefined);
+assert.equal(string.to.keyword(255, 255, 0), 'yellow');
+assert.equal(string.to.keyword(100, 255, 0), undefined);
 
 // Make sure .get() doesn't return object prototype values (regression test, #44)
 Object.keys(Object.getOwnPropertyDescriptors(Object.prototype))
 	.map(property => assert.deepStrictEqual([property, string.get(property)], [property, null]));
 
 // Make sure writing decimal values as hex doesn't cause bizarre output (regression test, #25)
-assert.equal(string.to.hex([44.2, 83.8, 44]), '#2C542C');
+assert.equal(string.to.hex(44.2, 83.8, 44), '#2C542C');

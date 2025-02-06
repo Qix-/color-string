@@ -4,10 +4,8 @@
 
 ## Install
 
-With [npm](http://npmjs.org/):
-
-```console
-$ npm install color-string
+```sh
+npm install color-string
 ```
 
 ## Usage
@@ -44,19 +42,18 @@ colorString.get.rgb('invalid color string')      // null
 ### Generation
 
 ```js
-colorString.to.hex([255, 255, 255])     // "#FFFFFF"
-colorString.to.hex([0, 0, 255, 0.4])    // "#0000FF66"
-colorString.to.hex([0, 0, 255], 0.4)    // "#0000FF66"
-colorString.to.rgb([255, 255, 255])     // "rgb(255, 255, 255)"
-colorString.to.rgb([0, 0, 255, 0.4])    // "rgba(0, 0, 255, 0.4)"
-colorString.to.rgb([0, 0, 255], 0.4)    // "rgba(0, 0, 255, 0.4)"
-colorString.to.rgb.percent([0, 0, 255]) // "rgb(0%, 0%, 100%)"
-colorString.to.keyword([255, 255, 0])   // "yellow"
-colorString.to.hsl([360, 100, 100])     // "hsl(360, 100%, 100%)"
-colorString.to.hwb([50, 3, 15])         // "hwb(50, 3%, 15%)"
-
-// all functions also support swizzling
-colorString.to.rgb(0, [0, 255], 0.4)    // "rgba(0, 0, 255, 0.4)"
-colorString.to.rgb([0, 0], [255], 0.4)  // "rgba(0, 0, 255, 0.4)"
-colorString.to.rgb([0], 0, [255, 0.4])  // "rgba(0, 0, 255, 0.4)"
+colorString.to.hex(255, 255, 255)     // "#FFFFFF"
+colorString.to.hex(0, 0, 255, 0.4)    // "#0000FF66"
+colorString.to.hex(0, 0, 255, 0.4)    // "#0000FF66"
+colorString.to.rgb(255, 255, 255)     // "rgb(255, 255, 255)"
+colorString.to.rgb(0, 0, 255, 0.4)    // "rgba(0, 0, 255, 0.4)"
+colorString.to.rgb(0, 0, 255, 0.4)    // "rgba(0, 0, 255, 0.4)"
+colorString.to.rgb.percent(0, 0, 255) // "rgb(0%, 0%, 100%)"
+colorString.to.keyword(255, 255, 0)   // "yellow"
+colorString.to.hsl(360, 100, 100)     // "hsl(360, 100%, 100%)"
+colorString.to.hwb(50, 3, 15)         // "hwb(50, 3%, 15%)"
 ```
+
+## License
+
+MIT

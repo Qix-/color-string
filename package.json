@@ -9,13 +9,19 @@
     "Josh Junon"
   ],
   "repository": "Qix-/color-string",
+  "type": "module",
+  "exports": "./index.js",
+  "types": "./index.d.ts",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "pretest": "xo",
-    "test": "node test/basic.js"
+    "test": "xo && tsd && node test/basic.js"
   },
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "xo": {
     "rules": {
@@ -24,11 +30,11 @@
     }
   },
   "dependencies": {
-    "color-name": "^1.0.0",
-    "simple-swizzle": "^0.2.2"
+    "color-name": "^2.0.0"
   },
   "devDependencies": {
-    "xo": "^0.12.1"
+    "tsd": "^0.31.2",
+    "xo": "^0.60.0"
   },
   "keywords": [
     "color",
