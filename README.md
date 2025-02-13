@@ -18,7 +18,7 @@ import {getColor, getRgb, getHsl, getHwb} from 'color-string';
 getColor('#FFF')                    // {model: 'rgb', value: [255, 255, 255, 1]}
 getColor('#FFFA')                   // {model: 'rgb', value: [255, 255, 255, 0.67]}
 getColor('#FFFFFFAA')               // {model: 'rgb', value: [255, 255, 255, 0.67]}
-getColor('rgb(244 233 100)')        // {model: 'rgb' value: [244, 233, 100, 1]});
+getColor('rgb(244 233 100)')        // {model: 'rgb', value: [244, 233, 100, 1]});
 getColor('rgb(100%, 30%, 90%)')     // {model: 'rgb', value: [255, 77, 229, 1]});
 getColor('rgb(100% 30% 90%)')       // {model: 'rgb', value: [255, 77, 229, 1]});
 getColor('hsl(360, 100%, 50%)')     // {model: 'hsl', value: [0, 100, 50, 1]}
