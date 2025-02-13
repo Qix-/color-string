@@ -18,9 +18,9 @@ import {getColor, getRgb, getHsl, getHwb} from 'color-string';
 getColor('#FFF')                    // {model: 'rgb', value: [255, 255, 255, 1]}
 getColor('#FFFA')                   // {model: 'rgb', value: [255, 255, 255, 0.67]}
 getColor('#FFFFFFAA')               // {model: 'rgb', value: [255, 255, 255, 0.67]}
-getColor('rgb(244 233 100)')        // {model: 'rgb', value: [244, 233, 100, 1]});
-getColor('rgb(100%, 30%, 90%)')     // {model: 'rgb', value: [255, 77, 229, 1]});
-getColor('rgb(100% 30% 90%)')       // {model: 'rgb', value: [255, 77, 229, 1]});
+getColor('rgb(244 233 100)')        // {model: 'rgb', value: [244, 233, 100, 1]})
+getColor('rgb(100%, 30%, 90%)')     // {model: 'rgb', value: [255, 77, 229, 1]})
+getColor('rgb(100% 30% 90%)')       // {model: 'rgb', value: [255, 77, 229, 1]})
 getColor('hsl(360, 100%, 50%)')     // {model: 'hsl', value: [0, 100, 50, 1]}
 getColor('hsl(360 100% 50%)')       // {model: 'hsl', value: [0, 100, 50, 1]}
 getColor('hwb(60, 3%, 60%)')        // {model: 'hwb', value: [60, 3, 60, 1]}
@@ -66,25 +66,25 @@ toHwb(50, 3, 15)         // "hwb(50, 3%, 15%)"
 ```js
 import {alphaClamp, rgbClamp, hueClamp, percentClamp} from 'color-string';
 
-alphaClamp(-1)           // 0
-alphaClamp(0.5)          // 0.5
-alphaClamp(1)            // 1
-alphaClamp(2)            // 1
+alphaClamp(-1)    // 0
+alphaClamp(0.5)   // 0.5
+alphaClamp(1)     // 1
+alphaClamp(2)     // 1
 
-rgbClamp(-255)           // 0
-rgbClamp(128)            // 128
-rgbClamp(255)            // 255
-rgbClamp(256)            // 255
+rgbClamp(-255)    // 0
+rgbClamp(128)     // 128
+rgbClamp(255)     // 255
+rgbClamp(256)     // 255
 
-hueClamp(-40)            // 320
-hueClamp(40)             // 40
-hueClamp(360)            // 0
-hueClamp(400)            // 40
+hueClamp(-40)     // 320
+hueClamp(40)      // 40
+hueClamp(360)     // 0
+hueClamp(400)     // 40
 
-percentClamp(-1)         // 0
-percentClamp(10)         // 10
-percentClamp(100)        // 100
-percentClamp(101)        // 100
+percentClamp(-1)  // 0
+percentClamp(10)  // 10
+percentClamp(100) // 100
+percentClamp(101) // 100
 ```
 
 ## License
