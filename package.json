@@ -26,7 +26,8 @@
   "xo": {
     "rules": {
       "no-cond-assign": 0,
-      "operator-linebreak": 0
+      "operator-linebreak": 0,
+      "@typescript-eslint/ban-types": 0
     }
   },
   "dependencies": {

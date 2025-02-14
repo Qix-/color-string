@@ -1,10 +1,10 @@
 import {expectType} from 'tsd';
 import colorString, {type Model} from './index.js';
 
-type GetColorResult = {model: Model; value: number[]} | undefined;
-type GetSpecificTypeResult = number[] | undefined;
+type GetColorResult = {model: Model; value: number[]} | null;
+type GetSpecificTypeResult = number[] | null;
 
-type ToColorResult = string | undefined;
+type ToColorResult = string | null;
 
 expectType<GetColorResult>(colorString.get('#FFF'));
 expectType<GetColorResult>(colorString.get('#FFFA'));
