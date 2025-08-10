@@ -24,6 +24,7 @@ assert.deepEqual(string.get.hsl('hsl(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]
 assert.deepEqual(string.get.hsl('hsl(240deg 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('hwb(12 50% 0%)'), [12, 50, 0, 1]);
 
 // Generic .get()
 assert.deepEqual(string.get('invalid'), null);
@@ -44,6 +45,7 @@ assert.deepEqual(string.get('hsl(240deg, 100%, 50.5%)'), {model: 'hsl', value: [
 assert.deepEqual(string.get('hsl(240deg 100% 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(240, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
+assert.deepEqual(string.get('hwb(12 50% 0%)'), {model: 'hwb', value: [12, 50, 0, 1]});
 
 // Invalid generic .get() calls
 assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
