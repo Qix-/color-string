@@ -18,6 +18,8 @@ assert.deepEqual(string.get.rgb('rgb(244 233 100)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('rgb(100% 30% 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('transparent'), [0, 0, 0, 0]);
+assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
+assert.deepEqual(string.get.rgb('BLUE'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
@@ -37,6 +39,8 @@ assert.deepEqual(string.get('rgb(244 233 100)'), {model: 'rgb', value: [244, 233
 assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
+assert.deepEqual(string.get('blue'), {model: 'rgb', value: [0, 0, 255, 1]});
+assert.deepEqual(string.get('BLUE'), {model: 'rgb', value: [0, 0, 255, 1]});
 assert.deepEqual(string.get('hsl(240, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(-480, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(240 100% 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
