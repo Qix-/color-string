@@ -1,7 +1,7 @@
 {
   "name": "color-string",
   "description": "Parser and generator for CSS color strings",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "author": "Josh Junon (https://github.com/qix-)",
   "contributors": [
     "Maxime Thirouin",
