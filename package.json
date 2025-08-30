@@ -2,11 +2,12 @@
   "name": "color-string",
   "description": "Parser and generator for CSS color strings",
   "version": "2.0.1",
-  "author": "Heather Arthur <fayearthur@gmail.com>",
+  "author": "Josh Junon (https://github.com/qix-)",
   "contributors": [
     "Maxime Thirouin",
     "Dyma Ywanov <dfcreative@gmail.com>",
-    "Josh Junon"
+    "Heather Arthur <fayearthur@gmail.com>",
+    "LitoMore (https://github.com/LitoMore)"
   ],
   "repository": "Qix-/color-string",
   "type": "module",
