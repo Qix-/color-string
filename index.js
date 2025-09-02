@@ -14,9 +14,8 @@ const cs = {
 	get: {},
 };
 
-cs.get = function (string = '') {
-	string = normalizeString(string);
-	const prefix = string.slice(0, 3);
+cs.get = function (string) {
+	const prefix = string.slice(0, 3).toLowerCase();
 	let value;
 	let model;
 	switch (prefix) {
@@ -46,8 +45,10 @@ cs.get = function (string = '') {
 	return {model, value};
 };
 
-cs.get.rgb = function (string = '') {
-	string = normalizeString(string);
+cs.get.rgb = function (string) {
+	if (!string) {
+		return null;
+	}
 
 	const abbr = /^#([a-f\d]{3,4})$/i;
 	const hex = /^#([a-f\d]{6})([a-f\d]{2})?$/i;
@@ -126,8 +127,10 @@ cs.get.rgb = function (string = '') {
 	return rgb;
 };
 
-cs.get.hsl = function (string = '') {
-	string = normalizeString(string);
+cs.get.hsl = function (string) {
+	if (!string) {
+		return null;
+	}
 
 	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
 	const match = string.match(hsl);
@@ -145,8 +148,10 @@ cs.get.hsl = function (string = '') {
 	return null;
 };
 
-cs.get.hwb = function (string = '') {
-	string = normalizeString(string);
+cs.get.hwb = function (string) {
+	if (!string) {
+		return null;
+	}
 
 	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*,\s*([+-]?[\d.]+)%\s*,\s*([+-]?[\d.]+)%\s*(?:,\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
 	const match = string.match(hwb);
@@ -220,12 +225,6 @@ function clamp(number_, min, max) {
 function hexDouble(number_) {
 	const string_ = Math.round(number_).toString(16).toUpperCase();
 	return (string_.length < 2) ? '0' + string_ : string_;
-}
-
-function normalizeString(string) {
-	string = string.toLowerCase();
-
-	return string;
 }
 
 export default cs;
