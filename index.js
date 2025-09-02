@@ -15,7 +15,7 @@ const cs = {
 };
 
 cs.get = function (string) {
-	const prefix = string.slice(0, 3).toLowerCase();
+	const prefix = string.slice(0, string.indexOf("(")).toLowerCase();
 	let value;
 	let model;
 	switch (prefix) {
@@ -28,6 +28,18 @@ cs.get = function (string) {
 		case 'hwb': {
 			value = cs.get.hwb(string);
 			model = 'hwb';
+			break;
+		}
+
+		case 'oklch': {
+			value = cs.get.oklch(string);
+			model = 'oklch';
+			break;
+		}
+
+		case 'lab': {
+			value = cs.get.lab(string);
+			model = 'lab';
 			break;
 		}
 
@@ -168,6 +180,87 @@ cs.get.hwb = function (string) {
 	return null;
 };
 
+cs.get.lab = function (string) {
+	if (!string) {
+		return null;
+	}
+
+	const lab = /^lab\(\s*(?<L>([0-9]{1,3}(\.\d*)?%?)|(none))\s+(?<a>(-?[0-9]{1,3}(\.\d*)?%?)|(none))\s+(?<b>(-?[0-9]{1,3}(\.\d*)?%?)|(none))(\s+\/\s+(?<A>(([0-9]{1,3}(\.\d+)?|(\.\d+))%?)|(none)))?\)$/;
+	const match = string.match(lab);
+
+	if (match) {
+		const match_L = match.groups.L;
+		const match_a = match.groups.a;
+		const match_b = match.groups.b;
+		const match_alpha = match.groups.A || 'none';
+
+		// a and b are numbers between -125 and 125 or percentages between -100% and 100%
+		const parseAB = (str) => {
+			if (str == "none")
+				return 0; // default value for "none"
+			if (str.endsWith("%")) {
+				const percentage = Number.parseFloat(str.slice(0, -1));
+				return percentage * 1.25;
+			}
+			return Number.parseFloat(str);
+		}
+
+		let a = clamp(parseAB(match_a), -125, 125);
+		let b = clamp(parseAB(match_b), -125, 125);
+
+		let L = 0; // default value for "none"
+		let alpha = 1; // default value for "none"
+
+		// L is a number between 0 and 100 or a percentage between 0% and 100%
+		if (match_L != "none")
+			L = clamp(match_L.endsWith("%") ? Number.parseFloat(match_L.slice(0, -1)) : Number.parseFloat(match_L), 0, 100);
+
+		// Alpha is a number between 0 and 1 or a percentage between 0% and 100%; it is optional and defaults to 1
+		if (match_alpha.length > 0 && match_alpha != "none")
+			alpha = clamp(match_alpha.endsWith("%") ? Number.parseFloat(match_alpha.slice(0, -1)) / 100 : Number.parseFloat(match_alpha), 0, 1);
+
+		return [L, a, b, alpha];
+	}
+
+	return null;
+};
+
+cs.get.oklch = function (string) {
+	if (!string) {
+		return null;
+	}
+
+	const oklch = /^oklch\(\s*(?<L>(([0-9]{1,3}(\.\d*)?%)|[0-1]?(\.\d*)?)|(none))\s+(?<C>(-?[0-9]{1,3}(\.\d*)?%?)|(none))\s+(?<H>(-?[0-9]{1,3}(\.\d*)?(deg)?)|(none))(\s+\/\s+(?<A>((([0-9]{1,3}(\.\d+)?)|(\.\d+))%?)|(none)))?\)$/;
+	const match = string.match(oklch);
+
+	if (match) {
+		const match_L = match.groups.L.replace("none", "0%");
+		const match_C = match.groups.C.replace("none", "0%");
+		const match_H = match.groups.H.replace("none", "0");
+		const match_alpha = (match.groups.A || "100%").replace("none", "100%");
+
+		// L (perceived lightness): number between 0 and 1 or percentage between 0% and 100% or "none" (= 0%)
+		let L = clamp(match_L.endsWith("%") ? Number.parseFloat(match_L.slice(0, -1)) / 100 : Number.parseFloat(match_L), 0, 1);
+
+		// C (chroma): number from 0 (no max) or percentage from 0% (0% = 0, 100% = 0.4) or "none" (= 0%)
+		let C = match_C.endsWith("%") ? Number.parseFloat(match_C.slice(0, -1)) / 250 : Number.parseFloat(match_C);
+		if (C < 0)
+			C = 0;
+
+		// H (hue): number or angle or "none" (= 0deg), no min/max
+		let H = Number.parseFloat(match_H.replace("deg", ""));
+
+		// A (alpha, optional): number between 0 and 1 or percentage between 0% and 100% or "none" (= 100%)
+		let A = 1;
+		if (match_alpha.length)
+			A = clamp(match_alpha.endsWith("%") ? Number.parseFloat(match_alpha) / 100 : Number.parseFloat(match_alpha), 0, 1);
+
+		return [L, C, H, A];
+	}
+
+	return null;
+};
+
 cs.to.hex = function (...rgba) {
 	return (
 		'#' +
@@ -212,6 +305,33 @@ cs.to.hwb = function (...hwba) {
 
 	return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
 };
+
+cs.to.lab = function(...lab) {
+	let alpha = '';
+	if (lab.length >= 4 && lab[3] != 1) {
+		alpha = ' / ' + lab[3];
+	}
+
+	return 'lab(' + lab[0] + ' ' + lab[1] + ' ' + lab[2] + alpha + ')';
+}
+
+cs.to.oklch = function(...lch) {
+	let alpha = '';
+	if (lch.length >= 4 && lch[3] != 1) {
+		alpha = ' / ' + lch[3];
+	}
+
+	return 'oklch(' + lch[0] + ' ' + lch[1] + ' ' + lch[2] + alpha + ')';
+}
+
+cs.to.oklch.percent = function(...lch) {
+	let alpha = '';
+	if (lch.length >= 4 && lch[3] != 1) {
+		alpha = ' / ' + lch[3] * 100 + '%';
+	}
+
+	return 'oklch(' + lch[0] * 100 + '% ' + lch[1] * 250 + '% ' + lch[2] + 'deg' + alpha + ')';
+}
 
 cs.to.keyword = function (...rgb) {
 	return reverseNames[rgb.slice(0, 3)];
