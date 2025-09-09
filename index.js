@@ -46,7 +46,7 @@ cs.get = function (string) {
 };
 
 cs.get.rgb = function (string) {
-	if (!string) {
+	if (!isValidString(string)) {
 		return null;
 	}
 
@@ -61,6 +61,7 @@ cs.get.rgb = function (string) {
 	let i;
 	let hexAlpha;
 
+	string = normalizeSpace(string);
 	if (match = string.match(hex)) {
 		hexAlpha = match[2];
 		match = match[1];
@@ -128,12 +129,12 @@ cs.get.rgb = function (string) {
 };
 
 cs.get.hsl = function (string) {
-	if (!string) {
+	if (!isValidString(string)) {
 		return null;
 	}
 
 	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
-	const match = string.match(hsl);
+	const match = normalizeSpace(string).match(hsl);
 
 	if (match) {
 		const alpha = Number.parseFloat(match[4]);
@@ -149,12 +150,12 @@ cs.get.hsl = function (string) {
 };
 
 cs.get.hwb = function (string) {
-	if (!string) {
+	if (!isValidString(string)) {
 		return null;
 	}
 
 	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:[eE][+-]?\d+)?)\s*)?\)$/;
-	const match = string.match(hwb);
+	const match = normalizeSpace(string).match(hwb);
 
 	if (match) {
 		const alpha = Number.parseFloat(match[4]);
@@ -225,6 +226,14 @@ function clamp(number_, min, max) {
 function hexDouble(number_) {
 	const string_ = Math.round(number_).toString(16).toUpperCase();
 	return (string_.length < 2) ? '0' + string_ : string_;
+}
+
+function isValidString(string) {
+	return typeof string === 'string' && string.length >= 4 && string.length <= 200;
+}
+
+function normalizeSpace(string) {
+	return string.split(/\s+/).join(' ').trim();
 }
 
 export default cs;
