@@ -154,7 +154,7 @@ cs.get.hwb = function (string) {
 		return null;
 	}
 
-	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
+	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
 	const match = string.match(hwb);
 
 	if (match) {
@@ -208,10 +208,10 @@ cs.to.hsl = function (...hsla) {
 cs.to.hwb = function (...hwba) {
 	let a = '';
 	if (hwba.length >= 4 && hwba[3] !== 1) {
-		a = ', ' + hwba[3];
+		a = ' / ' + hwba[3];
 	}
 
-	return 'hwb(' + hwba[0] + ', ' + hwba[1] + '%, ' + hwba[2] + '%' + a + ')';
+	return 'hwb(' + hwba[0] + ' ' + hwba[1] + '% ' + hwba[2] + '%' + a + ')';
 };
 
 cs.to.keyword = function (...rgb) {
