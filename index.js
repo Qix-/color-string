@@ -110,7 +110,8 @@ cs.get.rgb = function (string) {
 			return null;
 		}
 
-		rgb = [...colorNames[match[1]]];
+		// eslint-disable-next-line unicorn/prefer-spread
+		rgb = colorNames[match[1]].slice();
 		rgb[3] = 1;
 
 		return rgb;
