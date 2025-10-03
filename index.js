@@ -110,7 +110,7 @@ cs.get.rgb = function (string) {
 			return null;
 		}
 
-		rgb = colorNames[match[1]];
+		rgb = [...colorNames[match[1]]];
 		rgb[3] = 1;
 
 		return rgb;

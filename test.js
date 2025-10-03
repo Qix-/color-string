@@ -110,6 +110,15 @@ assert.deepEqual(string.get.hwb('hwb(-10.0deg, 100%, 50.5%, +0.6)'), [350, 100, 
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 
+// Changing the returned array shouldn't change the array when called with the same named color
+{
+	const col = string.get.rgb('red');
+	assert.deepEqual(col, [255, 0, 0, 1]);
+	col[0] = 0;
+	assert.deepEqual(col, [0, 0, 0, 1]);
+	assert.deepEqual(string.get.rgb('red'), [255, 0, 0, 1]);
+}
+
 // Alpha
 assert.deepEqual(normalizeAlpha(string.get.rgb('#fffa')), [255, 255, 255, '0.67']);
 assert.deepEqual(string.get.rgb('#c814e933'), [200, 20, 233, 0.2]);
