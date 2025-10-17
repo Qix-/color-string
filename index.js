@@ -52,7 +52,7 @@ cs.get.rgb = function (string) {
 
 	const abbr = /^#([a-f\d]{3,4})$/i;
 	const hex = /^#([a-f\d]{6})([a-f\d]{2})?$/i;
-	const rgba = /^rgba?\(\s*([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)(?=[\s,])\s*(?:,\s*)?([+-]?\d+)\s*(?:[\s,|/]\s*([+-]?[\d.]+)(%?)\s*)?\)$/;
+	const rgba = /^rgba?\(\s*([+-]?(?:\d*\.)?\d+(?:e\d+)?)(?=[\s,])\s*(?:,\s*)?([+-]?(?:\d*\.)?\d+(?:e\d+)?)(?=[\s,])\s*(?:,\s*)?([+-]?(?:\d*\.)?\d+(?:e\d+)?)\s*(?:[\s,|/]\s*([+-]?(?:\d*\.)?\d+(?:e\d+)?)(%?)\s*)?\)$/i;
 	const per = /^rgba?\(\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[\s,|/]\s*([+-]?[\d.]+)(%?)\s*)?\)$/;
 	const keyword = /^(\w+)$/;
 
@@ -87,7 +87,7 @@ cs.get.rgb = function (string) {
 		}
 	} else if (match = string.match(rgba)) {
 		for (i = 0; i < 3; i++) {
-			rgb[i] = Number.parseInt(match[i + 1], 10);
+			rgb[i] = Number.parseFloat(match[i + 1]);
 		}
 
 		if (match[4]) {
