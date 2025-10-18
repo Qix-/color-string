@@ -15,6 +15,10 @@ assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
 assert.deepEqual(string.get.rgb('#fffFEF'), [255, 255, 239, 1]);
 assert.deepEqual(string.get.rgb('rgb(244, 233, 100)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('RGB(244 233 100)'), [244, 233, 100, 1]);
+assert.deepEqual(string.get.rgb('rgb(244.5, 233.5, 100.5)'), [244.5, 233.5, 100.5, 1]);
+assert.deepEqual(string.get.rgb('rgb(244.5 233.5 100.5)'), [244.5, 233.5, 100.5, 1]);
+assert.deepEqual(string.get.rgb('rgb(2.44E2, 2.33e2, 1.00E2)'), [244, 233, 100, 1]);
+assert.deepEqual(string.get.rgb('rgb(2.44E2 2.33e2 1.00E2)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('RGB(100% 30% 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('transparent'), [0, 0, 0, 0]);
@@ -37,6 +41,10 @@ assert.deepEqual(string.get('#fffFEF00'), {model: 'rgb', value: [255, 255, 239, 
 assert.deepEqual(normalizeAlpha(string.get('#fffFEFa9')), {model: 'rgb', value: [255, 255, 239, '0.66']});
 assert.deepEqual(string.get('rgb(244, 233, 100)'), {model: 'rgb', value: [244, 233, 100, 1]});
 assert.deepEqual(string.get('rgb(244 233 100)'), {model: 'rgb', value: [244, 233, 100, 1]});
+assert.deepEqual(string.get('rgb(244.5, 233.5, 100.5)'), {model: 'rgb', value: [244.5, 233.5, 100.5, 1]});
+assert.deepEqual(string.get('rgb(244.5 233.5 100.5)'), {model: 'rgb', value: [244.5, 233.5, 100.5, 1]});
+assert.deepEqual(string.get('rgb(2.44E2, 2.33e2, 1.00E2)'), {model: 'rgb', value: [244, 233, 100, 1]});
+assert.deepEqual(string.get('rgb(2.44E2 2.33e2 1.00E2)'), {model: 'rgb', value: [244, 233, 100, 1]});
 assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
@@ -76,6 +84,10 @@ assert.strictEqual(string.get('rgba(10,  3)'), null);
 // With sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.rgb('rgb(-244 +233 -100)'), [0, 233, 0, 1]);
+assert.deepEqual(string.get.rgb('rgb(-244.5, +233.5, -100.5)'), [0, 233.5, 0, 1]);
+assert.deepEqual(string.get.rgb('rgb(-244.5 +233.5 -100.5)'), [0, 233.5, 0, 1]);
+assert.deepEqual(string.get.rgb('rgb(-2.44E2, +2.33e2, -1.00E2)'), [0, 233, 0, 1]);
+assert.deepEqual(string.get.rgb('rgb(-2.44E2 +2.33e2 -1.00E2)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
@@ -113,6 +125,15 @@ assert.deepEqual(string.get.hwb('hwb(-10.0deg, 100%, 50.5%, +0.6)'), [350, 100, 
 // Subsequent return values should not change array
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
+
+// Changing the returned array shouldn't change the array when called with the same named color
+{
+	const col = string.get.rgb('red');
+	assert.deepEqual(col, [255, 0, 0, 1]);
+	col[0] = 0;
+	assert.deepEqual(col, [0, 0, 0, 1]);
+	assert.deepEqual(string.get.rgb('red'), [255, 0, 0, 1]);
+}
 
 // Alpha
 assert.deepEqual(normalizeAlpha(string.get.rgb('#fffa')), [255, 255, 255, '0.67']);
