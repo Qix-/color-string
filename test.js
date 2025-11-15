@@ -14,20 +14,22 @@ function normalizeAlpha(result) {
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
 assert.deepEqual(string.get.rgb('#fffFEF'), [255, 255, 239, 1]);
 assert.deepEqual(string.get.rgb('rgb(244, 233, 100)'), [244, 233, 100, 1]);
-assert.deepEqual(string.get.rgb('rgb(244 233 100)'), [244, 233, 100, 1]);
+assert.deepEqual(string.get.rgb('RGB(244 233 100)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(244.5, 233.5, 100.5)'), [244.5, 233.5, 100.5, 1]);
 assert.deepEqual(string.get.rgb('rgb(244.5 233.5 100.5)'), [244.5, 233.5, 100.5, 1]);
 assert.deepEqual(string.get.rgb('rgb(2.44E2, 2.33e2, 1.00E2)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(2.44E2 2.33e2 1.00E2)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 229, 1]);
-assert.deepEqual(string.get.rgb('rgb(100% 30% 90%)'), [255, 77, 229, 1]);
+assert.deepEqual(string.get.rgb('RGB(100% 30% 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('transparent'), [0, 0, 0, 0]);
+assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
+assert.deepEqual(string.get.rgb('BLUE'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
-assert.deepEqual(string.get.hsl('hsl(240 100% 50.5%)'), [240, 100, 50.5, 1]);
+assert.deepEqual(string.get.hsl('HSL(240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
-assert.deepEqual(string.get.hsl('hsl(240deg 100% 50.5%)'), [240, 100, 50.5, 1]);
+assert.deepEqual(string.get.hsl('hsl(240DEG 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
-assert.deepEqual(string.get.hwb('hwb(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
+assert.deepEqual(string.get.hwb('HWB(240DEG, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(12 50% 0%)'), [12, 50, 0, 1]);
 
 // Generic .get()
@@ -46,6 +48,8 @@ assert.deepEqual(string.get('rgb(2.44E2 2.33e2 1.00E2)'), {model: 'rgb', value: 
 assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
+assert.deepEqual(string.get('blue'), {model: 'rgb', value: [0, 0, 255, 1]});
+assert.deepEqual(string.get('BLUE'), {model: 'rgb', value: [0, 0, 255, 1]});
 assert.deepEqual(string.get('hsl(240, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(-480, 100%, 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hsl(240 100% 50.5%)'), {model: 'hsl', value: [240, 100, 50.5, 1]});
