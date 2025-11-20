@@ -19,6 +19,10 @@ colorString.get('#FFFFFFAA')                     // {model: 'rgb', value: [255, 
 colorString.get('hsl(360, 100%, 50%)')           // {model: 'hsl', value: [0, 100, 50, 1]}
 colorString.get('hsl(360 100% 50%)')             // {model: 'hsl', value: [0, 100, 50, 1]}
 colorString.get('hwb(60, 3%, 60%)')              // {model: 'hwb', value: [60, 3, 60, 1]}
+colorString.get('oklch(50% 50% 250deg)')		 	// {model: 'oklch', value: [0.5, 0.2, 250, 1]}
+colorString.get('oklch(0.5 0.2 250 / .5)')			// {model: 'oklch', value: [0.5, 0.2, 250, 0.5]}
+colorString.get('lab(25 62.5 125)')					// {model: 'lab', value: [25, 62.5, 125, 1]}
+colorString.get('lab(25% 50% 100% / 50%)')			// {model: 'lab', value: [25, 62.5, 125, 0.5]}
 
 colorString.get.rgb('#FFF')                      // [255, 255, 255, 1]
 colorString.get.rgb('blue')                      // [0, 0, 255, 1]
@@ -36,6 +40,12 @@ colorString.get.hsl('hsl(360 60% 50% / 0.4)')    // [0, 60, 50, 0.4]
 colorString.get.hwb('hwb(60 3% 60%)')            // [60, 3, 60, 1]
 colorString.get.hwb('hwb(60, 3%, 60%)')          // [60, 3, 60, 1]
 colorString.get.hwb('hwb(60, 3%, 60%, 0.6)')     // [60, 3, 60, 0.6]
+
+colorString.get.oklch('oklch(50% 50% 250deg)')		 	// [0.5, 0.2, 250, 1]
+colorString.get.oklch('oklch(0.5 0.2 250 / .5)')		// [0.5, 0.2, 250, 0.5]
+
+colorString.get.lab('lab(25 62.5 125)')					// [25, 62.5, 125, 1]
+colorString.get.lab('lab(25% 50% 100% / 50%)')			// [25, 62.5, 125, 0.5]
 
 colorString.get.rgb('invalid color string')      // null
 ```

@@ -31,6 +31,12 @@ assert.deepEqual(string.get.hsl('hsl(240DEG 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('HWB(240DEG, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(12 50% 0%)'), [12, 50, 0, 1]);
+assert.deepEqual(string.get.oklch('oklch(50% 50% 250deg)'), [0.5, 0.2, 250, 1]);
+assert.deepEqual(string.get.oklch('oklch(0.5 0.2 250)'), [0.5, 0.2, 250, 1]);
+assert.deepEqual(string.get.oklch('oklch(none none none)'), [0, 0, 0, 1]);
+assert.deepEqual(string.get.lab('lab(25 62.5 125)'), [25, 62.5, 125, 1]);
+assert.deepEqual(string.get.lab('lab(25% 50% 100%)'), [25, 62.5, 125, 1]);
+assert.deepEqual(string.get.lab('lab(none none none)'), [0, 0, 0, 1]);
 
 // Generic .get()
 assert.deepEqual(string.get('invalid'), null);
@@ -58,6 +64,12 @@ assert.deepEqual(string.get('hsl(240deg 100% 50.5%)'), {model: 'hsl', value: [24
 assert.deepEqual(string.get('hwb(240, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(12 50% 0%)'), {model: 'hwb', value: [12, 50, 0, 1]});
+assert.deepEqual(string.get('oklch(50% 50% 250deg)'), {model: 'oklch', value: [0.5, 0.2, 250, 1]});
+assert.deepEqual(string.get('oklch(0.5 0.2 250)'), {model: 'oklch', value: [0.5, 0.2, 250, 1]});
+assert.deepEqual(string.get('oklch(none none none)'), {model: 'oklch', value: [0, 0, 0, 1]});
+assert.deepEqual(string.get('lab(25 62.5 125)'), {model: 'lab', value: [25, 62.5, 125, 1]});
+assert.deepEqual(string.get('lab(25% 50% 100%)'), {model: 'lab', value: [25, 62.5, 125, 1]});
+assert.deepEqual(string.get('lab(none none none)'), {model: 'lab', value: [0, 0, 0, 1]});
 
 // Invalid generic .get() calls
 assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
@@ -80,6 +92,15 @@ assert.strictEqual(string.get('rgb(10%,  2%, 2348723%dskjfs)'), null);
 assert.strictEqual(string.get('rgb(10%,  2%, 2348723dskjfs%)'), null);
 assert.strictEqual(string.get('rgb(10$,3)'), null);
 assert.strictEqual(string.get('rgba(10,  3)'), null);
+assert.strictEqual(string.get('oklch(1, 0.2, 300)'), null);
+assert.strictEqual(string.get('oklch(1 0.2 300 / )'), null);
+assert.strictEqual(string.get('oklch(1 0.2 100%)'), null);
+assert.strictEqual(string.get('oklch(1 0.2)'), null);
+assert.strictEqual(string.get('oklch(-0.5 -100% -10 / -5)'), null);
+assert.strictEqual(string.get('lab(-1 -130 -130)'), null);
+assert.strictEqual(string.get('lab(10, 25, 25)'), null);
+assert.strictEqual(string.get('lab(10 25 25 / )'), null);
+assert.strictEqual(string.get('lab(10 25)'), null);
 
 // With sign
 assert.deepEqual(string.get.rgb('rgb(-244, +233, -100)'), [0, 233, 0, 1]);
@@ -161,6 +182,10 @@ assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 1e-7)'), [200, 20, 33, 1e-7]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
+assert.deepEqual(string.get.oklch('oklch(60% 0.4 250 / .5)'), [0.6, 0.4, 250, 0.5]);
+assert.deepEqual(string.get.oklch('oklch(0.6 100% 250 / 50%)'), [0.6, 0.4, 250, 0.5]);
+assert.deepEqual(string.get.lab('lab(25 62.5 125 / .25)'), [25, 62.5, 125, 0.25]);
+assert.deepEqual(string.get.lab('lab(25% 50% 100% / 25%)'), [25, 62.5, 125, 0.25]);
 
 // No alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
@@ -174,6 +199,12 @@ assert.deepEqual(string.get.hsl('hsla(0, 0%, 0%, 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0deg 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 0)'), [40, 10, 100, 0]);
+assert.deepEqual(string.get.oklch('oklch(60% 0.4 250 / 0)'), [0.6, 0.4, 250, 0]);
+assert.deepEqual(string.get.oklch('oklch(0.6 100% 250 / none)'), [0.6, 0.4, 250, 1]);
+assert.deepEqual(string.get.oklch('oklch(0.6 100% 250)'), [0.6, 0.4, 250, 1]);
+assert.deepEqual(string.get.lab('lab(25 62.5 125 / none)'), [25, 62.5, 125, 1]);
+assert.deepEqual(string.get.lab('lab(25 62.5 125 / 0)'), [25, 62.5, 125, 0]);
+assert.deepEqual(string.get.lab('lab(25% 50% 100%)'), [25, 62.5, 125, 1]);
 
 // Range
 assert.deepEqual(string.get.rgb('rgba(300, 600, 100, 3)'), [255, 255, 100, 1]);
@@ -183,6 +214,8 @@ assert.deepEqual(string.get.rgb('rgba(8000% 100% 333% / 88)'), [255, 255, 255, 1
 assert.deepEqual(string.get.hsl('hsla(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hsl('hsl(400 10% 200% / 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
+assert.deepEqual(string.get.oklch('oklch(1.2 -100% 400 / 10)'), [1, 0, 400, 1]);
+assert.deepEqual(string.get.lab('lab(101 130 130)'), [100, 125, 125, 1]);
 
 // Invalid
 assert.strictEqual(string.get.rgb('yellowblue'), null);
@@ -213,6 +246,15 @@ assert.strictEqual(string.get.hwb('hwb(240, 100%, e'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e-'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, 0e+'), null);
 assert.strictEqual(string.get.hwb('hwb(240, 100%, +000e33'), null);
+assert.strictEqual(string.get.oklch('oklch(1, 0.2, 300)'), null);
+assert.strictEqual(string.get.oklch('oklch(1 0.2 300 / )'), null);
+assert.strictEqual(string.get.oklch('oklch(1 0.2 100%)'), null);
+assert.strictEqual(string.get.oklch('oklch(1 0.2)'), null);
+assert.strictEqual(string.get.oklch('oklch(-0.5 -100% -10 / -5)'), null);
+assert.strictEqual(string.get.lab('lab(-1 -130 -130)'), null);
+assert.strictEqual(string.get.lab('lab(10, 25, 25)'), null);
+assert.strictEqual(string.get.lab('lab(10 25 25 / )'), null);
+assert.strictEqual(string.get.lab('lab(10 25)'), null);
 
 // Generators
 assert.equal(string.to.hex(255, 10, 35), '#FF0A23');
@@ -231,6 +273,14 @@ assert.equal(string.to.hsl(280, 40, 60, 0.3), 'hsla(280, 40%, 60%, 0.3)');
 
 assert.equal(string.to.hwb(280, 40, 60), 'hwb(280, 40%, 60%)');
 assert.equal(string.to.hwb(280, 40, 60, 0.3), 'hwb(280, 40%, 60%, 0.3)');
+
+assert.equal(string.to.lab(25, 62.5, 125), 'lab(25 62.5 125)');
+assert.equal(string.to.lab(25, 62.5, 125, 0.5), 'lab(25 62.5 125 / 0.5)');
+
+assert.equal(string.to.oklch(0.5, 0.2, 250), 'oklch(0.5 0.2 250)');
+assert.equal(string.to.oklch(0.5, 0.2, 250, 0.5), 'oklch(0.5 0.2 250 / 0.5)');
+assert.equal(string.to.oklch.percent(0.5, 0.2, 250), 'oklch(50% 50% 250deg)');
+assert.equal(string.to.oklch.percent(0.5, 0.2, 250, 0.5), 'oklch(50% 50% 250deg / 50%)');
 
 assert.equal(string.to.keyword(255, 255, 0), 'yellow');
 assert.equal(string.to.keyword(100, 255, 0), undefined);
