@@ -111,6 +111,7 @@ assert.deepEqual(string.get.hsl('hsl(.5 100% 50% / -0.2)'), [0.5, 100, 50, 0]);
 assert.deepEqual(string.get.hwb('hwb(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%)'), [120, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +0.6)'), [120, 100, 50.5, 0.6]);
+assert.deepEqual(string.get.hwb('hwb(-240deg 100% 50.5% / +0.6)'), [120, 100, 50.5, 0.6]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e-7)'), [120, 100, 50.5, 1e-7]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, -2.e7)'), [120, 100, 50.5, 0]);
 assert.deepEqual(string.get.hwb('hwb(-240deg, 100%, 50.5%, +1e7)'), [120, 100, 50.5, 1]);
@@ -160,7 +161,7 @@ assert.deepEqual(string.get.hsl('hsla(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 1e-7)'), [200, 20, 33, 1e-7]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
-assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
+assert.deepEqual(string.get.hwb('hwb(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);
 
 // No alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
@@ -174,6 +175,7 @@ assert.deepEqual(string.get.hsl('hsla(0, 0%, 0%, 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hsl('hsl(0deg 0% 0% / 0)'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 0)'), [40, 10, 100, 0]);
+assert.deepEqual(string.get.hwb('hwb(400 10% 200% / 0)'), [40, 10, 100, 0]);
 
 // Range
 assert.deepEqual(string.get.rgb('rgba(300, 600, 100, 3)'), [255, 255, 100, 1]);
@@ -183,6 +185,7 @@ assert.deepEqual(string.get.rgb('rgba(8000% 100% 333% / 88)'), [255, 255, 255, 1
 assert.deepEqual(string.get.hsl('hsla(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hsl('hsl(400 10% 200% / 10)'), [40, 10, 100, 1]);
 assert.deepEqual(string.get.hwb('hwb(400, 10%, 200%, 10)'), [40, 10, 100, 1]);
+assert.deepEqual(string.get.hwb('hwb(400 10% 200% / 10)'), [40, 10, 100, 1]);
 
 // Invalid
 assert.strictEqual(string.get.rgb('yellowblue'), null);
@@ -229,8 +232,8 @@ assert.equal(string.to.rgb.percent(255, 10, 35, 0.3), 'rgba(100%, 4%, 14%, 0.3)'
 assert.equal(string.to.hsl(280, 40, 60), 'hsl(280, 40%, 60%)');
 assert.equal(string.to.hsl(280, 40, 60, 0.3), 'hsla(280, 40%, 60%, 0.3)');
 
-assert.equal(string.to.hwb(280, 40, 60), 'hwb(280, 40%, 60%)');
-assert.equal(string.to.hwb(280, 40, 60, 0.3), 'hwb(280, 40%, 60%, 0.3)');
+assert.equal(string.to.hwb(280, 40, 60), 'hwb(280 40% 60%)');
+assert.equal(string.to.hwb(280, 40, 60, 0.3), 'hwb(280 40% 60% / 0.3)');
 
 assert.equal(string.to.keyword(255, 255, 0), 'yellow');
 assert.equal(string.to.keyword(100, 255, 0), undefined);
