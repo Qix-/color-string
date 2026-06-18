@@ -224,7 +224,7 @@ function clamp(number_, min, max) {
 }
 
 function hexDouble(number_) {
-	const string_ = Math.round(number_).toString(16).toUpperCase();
+	const string_ = clamp(Math.round(number_), 0, 255).toString(16).toUpperCase();
 	return (string_.length < 2) ? '0' + string_ : string_;
 }
 

@@ -241,3 +241,11 @@ Object.keys(Object.getOwnPropertyDescriptors(Object.prototype))
 
 // Make sure writing decimal values as hex doesn't cause bizarre output (regression test, #25)
 assert.equal(string.to.hex(44.2, 83.8, 44), '#2C542C');
+
+// Make sure out-of-range channels clamp to a valid hex byte instead of emitting
+// malformed hex that get.rgb() cannot parse back (e.g. a 255.5 that rounds to 256).
+assert.equal(string.to.hex(255.5, 0, 0), '#FF0000');
+assert.equal(string.to.hex(256, 0, 0), '#FF0000');
+assert.equal(string.to.hex(300, 128, -20), '#FF8000');
+assert.equal(string.to.hex(-1, 0, 0), '#000000');
+assert.equal(string.to.hex(0, 0, 0, -0.5), '#00000000');
