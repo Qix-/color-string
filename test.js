@@ -19,8 +19,12 @@ assert.deepEqual(string.get.rgb('rgb(244.5, 233.5, 100.5)'), [244.5, 233.5, 100.
 assert.deepEqual(string.get.rgb('rgb(244.5 233.5 100.5)'), [244.5, 233.5, 100.5, 1]);
 assert.deepEqual(string.get.rgb('rgb(2.44E2, 2.33e2, 1.00E2)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(2.44E2 2.33e2 1.00E2)'), [244, 233, 100, 1]);
-assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 229, 1]);
-assert.deepEqual(string.get.rgb('RGB(100% 30% 90%)'), [255, 77, 229, 1]);
+assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 230, 1]);
+assert.deepEqual(string.get.rgb('RGB(100% 30% 90%)'), [255, 77, 230, 1]);
+// Percentage rounding: 2.55 is not exactly representable in floating point, so p * 2.55 lands just
+// below the half-integer for p = 50 and p = 90 (50% -> 127, 90% -> 229). p * 255 / 100 is exact.
+assert.deepEqual(string.get.rgb('rgb(50%, 50%, 50%)'), [128, 128, 128, 1]);
+assert.deepEqual(string.get.rgb('rgb(90%, 90%, 90%)'), [230, 230, 230, 1]);
 assert.deepEqual(string.get.rgb('transparent'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('BLUE'), [0, 0, 255, 1]);
@@ -45,8 +49,8 @@ assert.deepEqual(string.get('rgb(244.5, 233.5, 100.5)'), {model: 'rgb', value: [
 assert.deepEqual(string.get('rgb(244.5 233.5 100.5)'), {model: 'rgb', value: [244.5, 233.5, 100.5, 1]});
 assert.deepEqual(string.get('rgb(2.44E2, 2.33e2, 1.00E2)'), {model: 'rgb', value: [244, 233, 100, 1]});
 assert.deepEqual(string.get('rgb(2.44E2 2.33e2 1.00E2)'), {model: 'rgb', value: [244, 233, 100, 1]});
-assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
-assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 229, 1]});
+assert.deepEqual(string.get('rgb(100%, 30%, 90%)'), {model: 'rgb', value: [255, 77, 230, 1]});
+assert.deepEqual(string.get('rgb(100% 30% 90%)'), {model: 'rgb', value: [255, 77, 230, 1]});
 assert.deepEqual(string.get('transparent'), {model: 'rgb', value: [0, 0, 0, 0]});
 assert.deepEqual(string.get('blue'), {model: 'rgb', value: [0, 0, 255, 1]});
 assert.deepEqual(string.get('BLUE'), {model: 'rgb', value: [0, 0, 255, 1]});
@@ -150,11 +154,11 @@ assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 0)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 / 0%)'), [200, 20, 233, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 20 233 0%)'), [200, 20, 233, 0]);
-assert.deepEqual(string.get.rgb('rgba(100%, 30%, 90%, 0.2)'), [255, 77, 229, 0.2]);
-assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 0.2)'), [255, 77, 229, 0.2]);
-assert.deepEqual(string.get.rgb('rgba(100% 30% 90% 0.2)'), [255, 77, 229, 0.2]);
-assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 20%)'), [255, 77, 229, 0.2]);
-assert.deepEqual(string.get.rgb('rgba(100% 30% 90% 20%)'), [255, 77, 229, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(100%, 30%, 90%, 0.2)'), [255, 77, 230, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 0.2)'), [255, 77, 230, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(100% 30% 90% 0.2)'), [255, 77, 230, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(100% 30% 90% / 20%)'), [255, 77, 230, 0.2]);
+assert.deepEqual(string.get.rgb('rgba(100% 30% 90% 20%)'), [255, 77, 230, 0.2]);
 assert.deepEqual(string.get.hsl('hsla(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hsl('hsla(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);

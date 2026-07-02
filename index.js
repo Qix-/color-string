@@ -95,7 +95,7 @@ cs.get.rgb = function (string) {
 		}
 	} else if (match = string.match(per)) {
 		for (i = 0; i < 3; i++) {
-			rgb[i] = Math.round(Number.parseFloat(match[i + 1]) * 2.55);
+			rgb[i] = Math.round(Number.parseFloat(match[i + 1]) * 255 / 100);
 		}
 
 		if (match[4]) {
