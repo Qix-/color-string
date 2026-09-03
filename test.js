@@ -88,6 +88,7 @@ assert.deepEqual(string.get.rgb('rgb(-244.5, +233.5, -100.5)'), [0, 233.5, 0, 1]
 assert.deepEqual(string.get.rgb('rgb(-244.5 +233.5 -100.5)'), [0, 233.5, 0, 1]);
 assert.deepEqual(string.get.rgb('rgb(-2.44E2, +2.33e2, -1.00E2)'), [0, 233, 0, 1]);
 assert.deepEqual(string.get.rgb('rgb(-2.44E2 +2.33e2 -1.00E2)'), [0, 233, 0, 1]);
+assert.deepEqual(string.get.rgb('rgb(1e-2, +1e+1, 0)'), [0.01, 10, 0, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(+240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
@@ -95,6 +96,7 @@ assert.deepEqual(string.get.rgb('rgba(200 +20 -233 / -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 +20 -233 -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.rgb('rgba(200, +20, -233, -0.0)'), [200, 20, 0, 0]);
 assert.deepEqual(string.get.rgb('rgba(200 +20 -233 / -0.0)'), [200, 20, 0, 0]);
+assert.deepEqual(string.get.rgb('rgba(136, 191, 77, 7.5e-7)'), [136, 191, 77, 7.5e-7]);
 assert.deepEqual(string.get.hsl('hsla(+200, 100%, 50%, -0.2)'), [200, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsla(+200, 100%, 50%, -1e-7)'), [200, 100, 50, 0]);
 assert.deepEqual(string.get.hsl('hsl(+200 100% 50% / -0.2)'), [200, 100, 50, 0]);
