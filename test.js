@@ -21,6 +21,9 @@ assert.deepEqual(string.get.rgb('rgb(2.44E2, 2.33e2, 1.00E2)'), [244, 233, 100, 
 assert.deepEqual(string.get.rgb('rgb(2.44E2 2.33e2 1.00E2)'), [244, 233, 100, 1]);
 assert.deepEqual(string.get.rgb('rgb(100%, 30%, 90%)'), [255, 77, 229, 1]);
 assert.deepEqual(string.get.rgb('RGB(100% 30% 90%)'), [255, 77, 229, 1]);
+assert.deepEqual(string.get.rgb('rgb(1.00E2%, 3.0e1%, 9.0e1%)'), [255, 77, 229, 1]);
+assert.deepEqual(string.get.rgb('rgb(.%, .%, .%)'), null);
+assert.deepEqual(string.get.rgb('rgb(., ., .)'), null);
 assert.deepEqual(string.get.rgb('transparent'), [0, 0, 0, 0]);
 assert.deepEqual(string.get.rgb('blue'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.rgb('BLUE'), [0, 0, 255, 1]);
