@@ -27,6 +27,12 @@ assert.deepEqual(string.get.rgb('BLUE'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('HSL(240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
+
+assert.deepEqual(string.get.hsl('hsl(1e2 50% 50%)'), [100, 50, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(1.5e2deg 50% 50%)'), [150, 50, 50, 1]);
+assert.deepEqual(string.get.hwb('hwb(1e2 0% 0%)'), [100, 0, 0, 1]);
+assert.deepEqual(string.get.hwb('hwb(1.5e2deg 0% 0%)'), [150, 0, 0, 1]);
+
 assert.deepEqual(string.get.hsl('hsl(240DEG 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('HWB(240DEG, 100%, 50.5%)'), [240, 100, 50.5, 1]);
