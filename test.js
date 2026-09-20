@@ -59,9 +59,11 @@ assert.deepEqual(string.get('hwb(240, 100%, 50.5%)'), {model: 'hwb', value: [240
 assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(12 50% 0%)'), {model: 'hwb', value: [12, 50, 0, 1]});
 
-// Invalid generic .get() calls
-assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
-assert.deepEqual(string.get('hsl(250 100% 50% / 50%)'), null);
+// Percentage alpha is valid for hsl/hsla (CSS Color Level 4)
+assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), {model: 'hsl', value: [250, 100, 50, 0.5]});
+assert.deepEqual(string.get('hsl(250 100% 50% / 50%)'), {model: 'hsl', value: [250, 100, 50, 0.5]});
+
+// Invalid generic .get() calls (mixed number/% channels in rgb)
 assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('rgba(250 100% 50% 50%)'), null);
 assert.deepEqual(string.get('333333'), null);
