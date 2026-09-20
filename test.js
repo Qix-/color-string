@@ -27,6 +27,16 @@ assert.deepEqual(string.get.rgb('BLUE'), [0, 0, 255, 1]);
 assert.deepEqual(string.get.hsl('hsl(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('HSL(240 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hsl('hsl(240deg, 100%, 50.5%)'), [240, 100, 50.5, 1]);
+
+assert.deepEqual(string.get.hsl('hsl(0.5turn 50% 50%)'), [180, 50, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(200grad 50% 50%)'), [180, 50, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(3.141592653589793rad 50% 50%)'), [180, 50, 50, 1]);
+assert.deepEqual(string.get.hsl('hsl(180deg 50% 50%)'), [180, 50, 50, 1]);
+assert.deepEqual(string.get.hwb('hwb(0.5turn 0% 0%)'), [180, 0, 0, 1]);
+assert.deepEqual(string.get.hwb('hwb(200grad 0% 0%)'), [180, 0, 0, 1]);
+assert.deepEqual(string.get.hwb('hwb(3.141592653589793rad 0% 0%)'), [180, 0, 0, 1]);
+assert.deepEqual(string.get.hwb('hwb(180DEG 0% 0%)'), [180, 0, 0, 1]);
+
 assert.deepEqual(string.get.hsl('hsl(240DEG 100% 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('hwb(240, 100%, 50.5%)'), [240, 100, 50.5, 1]);
 assert.deepEqual(string.get.hwb('HWB(240DEG, 100%, 50.5%)'), [240, 100, 50.5, 1]);

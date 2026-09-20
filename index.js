@@ -133,14 +133,14 @@ cs.get.hsl = function (string) {
 		return null;
 	}
 
-	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
+	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(deg|grad|rad|turn)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
 	const match = string.match(hsl);
 
 	if (match) {
-		const alpha = Number.parseFloat(match[4]);
-		const h = ((Number.parseFloat(match[1]) % 360) + 360) % 360;
-		const s = clamp(Number.parseFloat(match[2]), 0, 100);
-		const l = clamp(Number.parseFloat(match[3]), 0, 100);
+		const alpha = Number.parseFloat(match[5]);
+		const h = ((hueToDegrees(match[1], match[2]) % 360) + 360) % 360;
+		const s = clamp(Number.parseFloat(match[3]), 0, 100);
+		const l = clamp(Number.parseFloat(match[4]), 0, 100);
 		const a = clamp(Number.isNaN(alpha) ? 1 : alpha, 0, 1);
 
 		return [h, s, l, a];
@@ -154,14 +154,14 @@ cs.get.hwb = function (string) {
 		return null;
 	}
 
-	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
+	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(deg|grad|rad|turn)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
 	const match = string.match(hwb);
 
 	if (match) {
-		const alpha = Number.parseFloat(match[4]);
-		const h = ((Number.parseFloat(match[1]) % 360) + 360) % 360;
-		const w = clamp(Number.parseFloat(match[2]), 0, 100);
-		const b = clamp(Number.parseFloat(match[3]), 0, 100);
+		const alpha = Number.parseFloat(match[5]);
+		const h = ((hueToDegrees(match[1], match[2]) % 360) + 360) % 360;
+		const w = clamp(Number.parseFloat(match[3]), 0, 100);
+		const b = clamp(Number.parseFloat(match[4]), 0, 100);
 		const a = clamp(Number.isNaN(alpha) ? 1 : alpha, 0, 1);
 		return [h, w, b, a];
 	}
@@ -221,6 +221,31 @@ cs.to.keyword = function (...rgb) {
 // Helpers
 function clamp(number_, min, max) {
 	return Math.min(Math.max(min, number_), max);
+}
+
+/**
+ * Convert a CSS <hue> to degrees.
+ * @see https://drafts.csswg.org/css-color/#typedef-hue
+ */
+function hueToDegrees(value, unit) {
+	const n = Number.parseFloat(value);
+	switch ((unit || 'deg').toLowerCase()) {
+		case 'grad': {
+			return n * 360 / 400;
+		}
+
+		case 'rad': {
+			return n * 180 / Math.PI;
+		}
+
+		case 'turn': {
+			return n * 360;
+		}
+
+		default: {
+			return n;
+		}
+	}
 }
 
 function hexDouble(number_) {
