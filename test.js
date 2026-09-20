@@ -161,6 +161,11 @@ assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 1e-7)'), [200, 20, 33, 1e-7]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 0.2)'), [200, 20, 33, 0.2]);
 assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 1e-7)'), [200, 20, 33, 1e-7]);
+assert.deepEqual(string.get.hsl('hsl(120 50% 50% / 50%)'), [120, 50, 50, 0.5]);
+assert.deepEqual(string.get.hsl('hsla(120, 50%, 50%, 50%)'), [120, 50, 50, 0.5]);
+assert.deepEqual(string.get.hsl('hsl(200 20% 33% / 20%)'), [200, 20, 33, 0.2]);
+assert.deepEqual(string.get.hwb('hwb(120, 0%, 0%, 50%)'), [120, 0, 0, 0.5]);
+assert.deepEqual(string.get.hwb('hwb(200, 20%, 33%, 20%)'), [200, 20, 33, 0.2]);
 
 // No alpha
 assert.deepEqual(string.get.rgb('#fef'), [255, 238, 255, 1]);
