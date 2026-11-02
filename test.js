@@ -239,5 +239,15 @@ assert.equal(string.to.keyword(100, 255, 0), undefined);
 Object.keys(Object.getOwnPropertyDescriptors(Object.prototype))
 	.map(property => assert.deepStrictEqual([property, string.get(property)], [property, null]));
 
+// Make sure rgb percentage parsing doesn't backtrack pathologically on long inputs.
+// A long, ultimately-invalid percentage string must return quickly rather than stall.
+const redosInput = `RGB(.%${'\t'.repeat(5000)}.%${'\t'.repeat(5000)}.%${'\t'.repeat(5000)}+.%.%.%)`;
+const redosStart = Date.now();
+assert.equal(string.get(redosInput), null);
+assert.ok(Date.now() - redosStart < 1000, 'rgb percentage parsing should not backtrack pathologically');
+
+// Valid rgb percentage strings with surrounding whitespace still parse correctly.
+assert.deepEqual(string.get.rgb('rgb(  100%  ,  30%  ,  90%  )'), [255, 77, 229, 1]);
+
 // Make sure writing decimal values as hex doesn't cause bizarre output (regression test, #25)
 assert.equal(string.to.hex(44.2, 83.8, 44), '#2C542C');
