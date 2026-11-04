@@ -128,19 +128,32 @@ cs.get.rgb = function (string) {
 	return rgb;
 };
 
+// CSS <angle> units, as multiples of a degree
+const angleUnits = {
+	deg: 1,
+	grad: 360 / 400,
+	rad: 180 / Math.PI,
+	turn: 360,
+};
+
+function hueToDegrees(value, unit) {
+	const degrees = Number.parseFloat(value) * angleUnits[(unit || 'deg').toLowerCase()];
+	return ((degrees % 360) + 360) % 360;
+}
+
 cs.get.hsl = function (string) {
 	if (!string) {
 		return null;
 	}
 
-	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
+	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(deg|grad|rad|turn)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
 	const match = string.match(hsl);
 
 	if (match) {
-		const alpha = Number.parseFloat(match[4]);
-		const h = ((Number.parseFloat(match[1]) % 360) + 360) % 360;
-		const s = clamp(Number.parseFloat(match[2]), 0, 100);
-		const l = clamp(Number.parseFloat(match[3]), 0, 100);
+		const alpha = Number.parseFloat(match[5]);
+		const h = hueToDegrees(match[1], match[2]);
+		const s = clamp(Number.parseFloat(match[3]), 0, 100);
+		const l = clamp(Number.parseFloat(match[4]), 0, 100);
 		const a = clamp(Number.isNaN(alpha) ? 1 : alpha, 0, 1);
 
 		return [h, s, l, a];
@@ -154,14 +167,14 @@ cs.get.hwb = function (string) {
 		return null;
 	}
 
-	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(?:deg)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
+	const hwb = /^hwb\(\s*([+-]?\d{0,3}(?:\.\d+)?)(deg|grad|rad|turn)?\s*[\s,]\s*([+-]?[\d.]+)%\s*[\s,]\s*([+-]?[\d.]+)%\s*(?:[\s,]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
 	const match = string.match(hwb);
 
 	if (match) {
-		const alpha = Number.parseFloat(match[4]);
-		const h = ((Number.parseFloat(match[1]) % 360) + 360) % 360;
-		const w = clamp(Number.parseFloat(match[2]), 0, 100);
-		const b = clamp(Number.parseFloat(match[3]), 0, 100);
+		const alpha = Number.parseFloat(match[5]);
+		const h = hueToDegrees(match[1], match[2]);
+		const w = clamp(Number.parseFloat(match[3]), 0, 100);
+		const b = clamp(Number.parseFloat(match[4]), 0, 100);
 		const a = clamp(Number.isNaN(alpha) ? 1 : alpha, 0, 1);
 		return [h, w, b, a];
 	}
