@@ -59,9 +59,29 @@ assert.deepEqual(string.get('hwb(240, 100%, 50.5%)'), {model: 'hwb', value: [240
 assert.deepEqual(string.get('hwb(240deg, 100%, 50.5%)'), {model: 'hwb', value: [240, 100, 50.5, 1]});
 assert.deepEqual(string.get('hwb(12 50% 0%)'), {model: 'hwb', value: [12, 50, 0, 1]});
 
+// HSL percentage alpha uses the same 0–100 scale as RGB percentage alpha.
+for (const [alpha, expected] of [
+	['50%', 0.5],
+	['0%', 0],
+	['100%', 1],
+	['-25%', 0],
+	['150%', 1],
+	['50.5%', 0.505],
+	['5e1%', 0.5],
+	['5e-1%', 0.005],
+]) {
+	for (const input of [`hsla(250, 100%, 50%, ${alpha})`, `hsl(250 100% 50% / ${alpha})`]) {
+		assert.deepEqual(string.get.hsl(input), [250, 100, 50, expected]);
+		assert.deepEqual(string.get(input), {model: 'hsl', value: [250, 100, 50, expected]});
+	}
+}
+
 // Invalid generic .get() calls
-assert.deepEqual(string.get('hsla(250, 100%, 50%, 50%)'), null);
-assert.deepEqual(string.get('hsl(250 100% 50% / 50%)'), null);
+for (const alpha of ['%', '.%', '50%%', '50 %', '50px']) {
+	assert.strictEqual(string.get.hsl(`hsl(250 100% 50% / ${alpha})`), null);
+	assert.strictEqual(string.get(`hsl(250 100% 50% / ${alpha})`), null);
+}
+
 assert.deepEqual(string.get('rgba(250, 100%, 50%, 50%)'), null);
 assert.deepEqual(string.get('rgba(250 100% 50% 50%)'), null);
 assert.deepEqual(string.get('333333'), null);

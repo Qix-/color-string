@@ -133,11 +133,15 @@ cs.get.hsl = function (string) {
 		return null;
 	}
 
-	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)\s*)?\)$/i;
+	const hsl = /^hsla?\(\s*([+-]?(?:\d{0,3}\.)?\d+)(?:deg)?\s*,?\s*([+-]?[\d.]+)%\s*,?\s*([+-]?[\d.]+)%\s*(?:[,|/]\s*([+-]?(?=\.\d|\d)(?:0|[1-9]\d*)?(?:\.\d*)?(?:e[+-]?\d+)?)(%)?\s*)?\)$/i;
 	const match = string.match(hsl);
 
 	if (match) {
-		const alpha = Number.parseFloat(match[4]);
+		let alpha = Number.parseFloat(match[4]);
+		if (match[5]) {
+			alpha /= 100;
+		}
+
 		const h = ((Number.parseFloat(match[1]) % 360) + 360) % 360;
 		const s = clamp(Number.parseFloat(match[2]), 0, 100);
 		const l = clamp(Number.parseFloat(match[3]), 0, 100);
